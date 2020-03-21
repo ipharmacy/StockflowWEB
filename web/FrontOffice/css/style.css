@@ -217,8 +217,8 @@ button:hover {
   background: #ff6600;
 }
 
-.bg-banner-one {
-  background: url(../images/background/homepage-one-banner.jpg) no-repeat;
+.bg-banner-on {
+  background: url(../images/background/backIndex.png) no-repeat;
   background-size: cover;
   background-position: center center;
 }
@@ -291,7 +291,7 @@ button:hover {
 }
 
 .bg-title {
-  background: url(../images/background/page-title-bg.jpg) no-repeat;
+  background: url(../images/background/back.png) no-repeat;
   background-size: cover;
   background-position: center center;
 }
@@ -710,10 +710,10 @@ select.form-control:not([size]):not([multiple]) {
   }
 }
 
-.main-nav .ticket {
-  background: #ff6600;
+.main-nav .login {
   display: block;
-  padding: 34px 32px;
+  padding: 10px 10px;
+  margin-right: 50px;
 }
 
 @media (max-width: 1200px) {
@@ -780,7 +780,7 @@ select.form-control:not([size]):not([multiple]) {
 .page-title .breadcrumb .breadcrumb-item {
   float: none;
   display: inline-block;
-  text-transform: uppercase;
+  text-transform: full-width;
 }
 
 .page-title .breadcrumb .breadcrumb-item.active {
@@ -1313,6 +1313,7 @@ select.form-control:not([size]):not([multiple]) {
   color: #fff;
   line-height: 50px;
 }
+
 
 .speakers .speaker-item .image .socials ul li a:hover {
   background: #fff;
