@@ -1,3 +1,9 @@
 produit_homepage:
     path:     /
     defaults: { _controller: ProduitBundle:Default:index }
+afficherProduits:
+    path:     /afficherProduits
+    defaults: { _controller: ProduitBundle:Produit:AfficherProduit }
+details:
+    path:     /details/{idProduit}
+    defaults: { _controller: ProduitBundle:Produit:AfficherDetailsProduit }
