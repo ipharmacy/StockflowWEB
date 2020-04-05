@@ -4,6 +4,58 @@ produit_homepage:
 afficherProduits:
     path:     /afficherProduits
     defaults: { _controller: ProduitBundle:Produit:AfficherProduit }
+afficherProduitTrie:
+    path:     /afficherProduitsTrie/{choix}
+    defaults: { _controller: ProduitBundle:Produit:AfficherProduitTrie }
 details:
     path:     /details/{idProduit}
     defaults: { _controller: ProduitBundle:Produit:AfficherDetailsProduit }
+back:
+    path:     /back
+    defaults: { _controller: ProduitBundle:Default:indexBack}
+listProduitBack:
+    path:     /listProduitBack
+    defaults: { _controller: ProduitBundle:Produit:listProduitBack}
+supprimerProduit:
+    path:     /supprimerProduit/{idProduit}
+    defaults: { _controller: ProduitBundle:Produit:SupprimerProduit }
+archiverProduit:
+    path:     /archiverProduit/{idProduit}
+    defaults: { _controller: ProduitBundle:Produit:ArchiverProduit }
+desarchiverProduit:
+    path:     /desarchiverProduit/{idProduit}
+    defaults: { _controller: ProduitBundle:Produit:desarchiverProduit }
+AjouterProduit:
+    path:     /ajouterProduit
+    defaults: { _controller: ProduitBundle:Produit:AjouterProduit}
+ModifierProduit:
+    path:     /modifier/{idProduit}
+    defaults: { _controller: ProduitBundle:Produit:ModifierProduit }
+AfficherCategorie:
+    path:     /AfficherCategorie
+    defaults: { _controller: ProduitBundle:Categorie:AfficherCategorie }
+supprimerCategorie:
+    path:     /supprimerCategorie/{id}
+    defaults: { _controller: ProduitBundle:Categorie:SupprimerCategorie }
+AjouterCategorie:
+    path:     /ajouterCategorie
+    defaults: { _controller: ProduitBundle:Categorie:AjouterCategorie}
+RechercheProduit:
+    path:     /RechercheProduit
+    defaults: { _controller: ProduitBundle:Produit:searchFront}
+AfficherHistorique:
+    path:     /AfficherHistorique
+    defaults: { _controller: ProduitBundle:HistoriqueProduit:AfficherHistorique}
+supprimerHistorique:
+    path:     /supprimerHistorique/{id}
+    defaults: { _controller: ProduitBundle:HistoriqueProduit:supprimerHistorique}
+recupererStat:
+    path:     /recupererStat
+    defaults: { _controller: ProduitBundle:Produit:recupererStat}
+recupererStat2:
+    path:     /recupererStat2
+    defaults: { _controller: ProduitBundle:Produit:recupererStat2}
+supprimerHistoriqueAll:
+    path:     /supprimerHistoriqueAll
+    defaults: { _controller: ProduitBundle:HistoriqueProduit:supprimerHistoriqueAll}
+

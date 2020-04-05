@@ -80,7 +80,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{{ path('back') }}">Dashboard</a>
                 </li>
             </ul>
         </div>
@@ -104,7 +104,7 @@
 =            Affichage la liste des produits            =
 ============================-->
 
-<section class="section speakers bg-speaker overlay-lighter">
+<section class="section speakers bg-timer overlay-lighter">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -114,24 +114,57 @@
 
                 </div>
             </div>
+            <div class="col-lg-6 col-md-10 mx-auto">
+                <div class="sidebar">
+                    <!-- Search Widget -->
+                  <form method="POST">
+                      <div class="widget search p-0">
+                          <div class="input-group">
+                              <input type="text" class="form-control main m-0"  placeholder="Search..." name="search">
+
+                              <input class="input-group-addon" type="submit" name="submit" value="recherche">
+
+                          </div>
+                      </div>
+                  </form>
+
+                    <div class="widget tags">
+                        <!-- Widget Header -->
+                        <h5 class="widget-header">Trié par :</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'prix'})}}" style="color: white">Prix</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'nom'})}}" style="color: white">Nom</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'date'})}}"style="color: white">Date</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'idCategorie'})}}"style="color: white">Catégorie</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="row">
             {% for row in produit %}
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <!-- Speaker 1 -->
                 <div class="speaker-item">
                     <div class="image">
-                        <img src="{{ asset('uploads/dhia.jpg')}}" alt="View details" class="img-fluid">
+                        <img src="{{ asset('../web/uploads/products/'~row.imageName()) }}" alt="View details" class="img-fluid">
                         <div class="primary-overlay"></div>
                         <div class="socials">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="{{path('details',{'idProduit':row.idProduit})}}"><i>More</i></a></li>
+                                <li class="list-inline-item"><a href="{{path('details',{'idProduit':row.idProduit})}}"><i class="fa fa-eye"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
+
                             </ul>
                         </div>
                     </div>
                     <div class="content text-center">
-                        <h5><a href="single-speaker.html">{{ row.nom }}</a></h5>
-                        <p> {{ row.prix }} DT</p>
+                        <h5><a href="{{path('details',{'idProduit':row.idProduit})}}">{{ row.nom }}</a></h5>
+                        <p>Catégorie : {{ row.idCategorie.nom }}</p>
+                        <p>Prix : {{ row.prix }} DT</p>
+
                     </div>
                 </div>
             </div>
@@ -140,6 +173,7 @@
         </div>
     </div>
 </section>
+
 
 <!--============================
 =            Footer            =

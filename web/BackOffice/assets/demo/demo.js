@@ -71,7 +71,7 @@ demo = {
     };
 
     ctx = document.getElementById('lineChartExample').getContext("2d");
-
+    var datas = $('#test').data("isTest");
     gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
     gradientStroke.addColorStop(0, '#80b6f4');
     gradientStroke.addColorStop(1, chartColor);

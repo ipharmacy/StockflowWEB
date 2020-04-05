@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * HistoriqueProduit
  *
  * @ORM\Table(name="historique_produit")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ProduitBundle\Repository\HistoriqueProduitRepository")
  */
 class HistoriqueProduit
 {
@@ -20,6 +20,38 @@ class HistoriqueProduit
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
     /**
      * @var string
