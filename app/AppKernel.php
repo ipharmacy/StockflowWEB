@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new ProduitBundle\ProduitBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Vresh\TwilioBundle\VreshTwilioBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

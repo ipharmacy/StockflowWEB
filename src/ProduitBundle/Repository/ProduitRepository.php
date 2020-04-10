@@ -4,6 +4,8 @@
 namespace ProduitBundle\Repository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 
 class ProduitRepository extends EntityRepository
@@ -57,13 +59,13 @@ class ProduitRepository extends EntityRepository
             ->getResult();
 
     }
-    public function statProduit(){
+    public function statProduit($id){
         /*return $this->getEntityManager()
             ->createQuery('select p.idCategorie count(p.idCategorie) from ProduitBundle:Produit p GROUP BY p.idCategorie')
             ->getResult();
         */
         $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT produit.idCategorie, count(idCategorie) AS somme FROM produit group by idCategorie';
+        $sql = "SELECT produit.idCategorie, count(idCategorie) AS somme FROM produit  where idUtilisateur='$id' group by idCategorie";
 
         try {
             $stmt = $conn->prepare($sql);
@@ -76,4 +78,48 @@ class ProduitRepository extends EntityRepository
 
 
     }
+    public function findTopConsulted()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM ProduitBundle:Produit p ORDER BY p.nbvue DESC '
+            )->setMaxResults(6)
+            ->getResult();
+    }
+   /* public function recupererNbConsulter($idUser)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT count(p) FROM ProduitBundle:Produit p WHERE p.idUtilisateur=:idUser '
+            )->setParameter('idUser',$idUser)
+            ->getResult();
+    }*/
+    public function recupererNbConsulter($idUser)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT count(p) FROM ProduitBundle:consultProduit p WHERE p.idUtilisateur='$idUser' AND p.consulter=1");
+
+        try {
+            return $query->getSingleScalarResult();
+        } catch (NoResultException $e) {
+        } catch (NonUniqueResultException $e) {
+        }
+
+    }
+    public function getproduit(){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM produit';
+
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+
 }

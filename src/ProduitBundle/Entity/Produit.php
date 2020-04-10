@@ -106,6 +106,29 @@ class Produit
      */
     private $archiver;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbvue", type="integer",nullable=true)
+     */
+    private $nbvue;
+
+    /**
+     * @return int
+     */
+    public function getNbvue()
+    {
+        return $this->nbvue;
+    }
+
+    /**
+     * @param int $nbvue
+     */
+    public function setNbvue($nbvue)
+    {
+        $this->nbvue = $nbvue;
+    }
+
 
     /**
      * @return int

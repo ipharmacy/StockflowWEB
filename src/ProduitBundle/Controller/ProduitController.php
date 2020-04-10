@@ -3,6 +3,7 @@
 namespace ProduitBundle\Controller;
 use Doctrine\DBAL\Types\TextType;
 use ProduitBundle\Entity\Categorie;
+use ProduitBundle\Entity\consultProduit;
 use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Produit;
 use ProduitBundle\Form\ProduitType;
@@ -52,16 +53,36 @@ class ProduitController extends Controller
     }
     function AfficherDetailsProduitAction($idProduit)
     {
+        $consultProduit=new consultProduit();
+        $user=$this->getUser();
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository("ProduitBundle:Produit")->find($idProduit);
+        $nb= $produit->getNbvue();
+        $produit->setNbvue($nb+1);
+        $em->persist($produit);
+        $em->flush();
+        $consultProduit->setIdProduit($produit);
+        $consultProduit->setIdUtilisateur($produit->getidUtilisateur());
+        $consultProduit->setConsulter(1);
+        if ($user == null){
+            $consultProduit->setNomconsulteur("Anonyme");
+        }else
+        {
+            $consultProduit->setNomconsulteur($user->getUsername());
+        }
+        $em->persist($consultProduit);
+        $em->flush();
         return $this->render("@Produit/Produit/DetailProduit.html.twig", array('produit' => $produit));
     }
 
     function listProduitBackAction(){
         $em = $this->getDoctrine()->getManager();
         $id = $this->getUser()->getId();
+        $nb=$em->getRepository("ProduitBundle:Produit")->recupererNbConsulter($id);
+        //$idConsult=$em->getRepository("ProduitBundle:Produit")->recupererConsulter($id);
+        $consultProduit= $em->getRepository(consultProduit::class)->recupererConsulter($id);
         $produit = $em->getRepository("ProduitBundle:Produit")->findBy(array('idUtilisateur'=>$id),array('archiver'=>'asc'));
-        return $this->render("@Produit/Produit/listProduitBack.html.twig", array('produit' => $produit));
+        return $this->render("@Produit/Produit/listProduitBack.html.twig", array('produit' => $produit,'nb'=>$nb,'consultProduit'=>$consultProduit));
     }
     function SupprimerProduitAction($idProduit)
     {
@@ -75,14 +96,6 @@ class ProduitController extends Controller
         $em->flush();
         $em->persist($HistoriqueProduit);
         $em->flush();
-        $mail = \Swift_Message::newInstance() ->setSubject('[WebSite] - ')
-            ->setFrom('ipharmacywow80@gmail.com')
-            ->setTo('dhia.benhamouda@esprit.tn')->setBody("dqdsqdsq");
-            $this->get('mailer')->send($mail);
-
-
-
-
         return $this->redirectToRoute('listProduitBack');
     }
     public function AjouterProduitAction(Request $request){
@@ -99,6 +112,7 @@ class ProduitController extends Controller
             $produit->setDate($b);
             $produit->setIdEntrepot(2);
             $produit->setImg("sdqsd");
+            $produit->setNbvue(0);
             $description=$this->getUser()->getUsername().' a ajouter le produit '.$produit->getNom().' le '.$produit->getDate();
             $HistoriqueProduit=new HistoriqueProduit();
             $HistoriqueProduit->setDescription($description);
@@ -107,7 +121,20 @@ class ProduitController extends Controller
             $em->flush();
             $em->persist($HistoriqueProduit);
             $em->flush();
+            //$twilio = $this->get('twilio.api');
+            //$num=$this->getUser()->getTelephone();
+            //$tel="+216".$num;
+            //$message = $twilio->account->messages->sendMessage(
+              //  '+18312285377',
+                //$tel,
+                //$description
+            //);
+
+            //get an instance of \Service_Twilio
+            //print $message->sid;
+
             return $this->redirectToRoute('listProduitBack');
+
         }
         return $this->render('@Produit/Produit/ajouterProduit.html.twig',array('produitform'=>$form->createView()
         ));
@@ -169,7 +196,8 @@ class ProduitController extends Controller
         $names=array();
         $somme=array();
         $em=$this->getDoctrine()->getManager();
-        $result=$em->getRepository(Produit::class)->statProduit();
+        $id=$this->getUser()->getId();
+        $result=$em->getRepository(Produit::class)->statProduit($id);
         foreach ($result as $row){
            // array_push($sm,$row['idCategorie']);
             $id=intval($row['somme']);
@@ -183,8 +211,9 @@ class ProduitController extends Controller
         $idc=array();
         $names=array();
         $somme=[];
+        $id=$this->getUser()->getId();
         $em=$this->getDoctrine()->getManager();
-        $result=$em->getRepository(Produit::class)->statProduit();
+        $result=$em->getRepository(Produit::class)->statProduit($id);
         foreach ($result as $row){
             $id=intval($row['idCategorie']);
             $categorie=$em->getRepository(Categorie::class)->find($id);
@@ -193,6 +222,60 @@ class ProduitController extends Controller
         //var_dump("somme : ",$idc,"nom : ",$names);
         return new JsonResponse($names);
     }
+    function AfficherTopConsultedAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository("ProduitBundle:Produit")->findTopConsulted();
+        return $this->render("@Produit/Produit/listProduitTop.html.twig", array('produit' => $produit));
+    }
+    function AfficherDetailsFromBackProduitAction($idProduit,$id)
+    {
 
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository("ProduitBundle:Produit")->find($idProduit);
+        $consultProduit = $em->getRepository(consultProduit::class)->find($id);
+        $consultProduit->setConsulter(0);
+        $em->persist($consultProduit);
+        $em->flush();
+        return $this->render("@Produit/Produit/DetailProduit.html.twig", array('produit' => $produit));
+    }
+    public function GetSearchNameAction(){
+        $idc=array();
+        $em=$this->getDoctrine()->getManager();
+        $result=$em->getRepository(Produit::class)->getproduit();
 
+        foreach ($result as $row){
+
+            array_push($idc,$row['nom']);
+        }
+
+        //var_dump($result);
+        return new JsonResponse($idc);
+    }
+    public function GetSearchImageAction(){
+        $idc=array();
+        $em=$this->getDoctrine()->getManager();
+        $result=$em->getRepository(Produit::class)->getproduit();
+
+        foreach ($result as $row){
+
+            array_push($idc,$row['image_name']);
+        }
+
+        //var_dump($result);
+        return new JsonResponse($idc);
+    }
+    public function GetSearchIdAction(){
+        $idc=array();
+        $em=$this->getDoctrine()->getManager();
+        $result=$em->getRepository(Produit::class)->getproduit();
+
+        foreach ($result as $row){
+
+            array_push($idc,$row['id_produit']);
+        }
+
+        //var_dump($result);
+        return new JsonResponse($idc);
+    }
 }

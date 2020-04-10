@@ -58,4 +58,20 @@ recupererStat2:
 supprimerHistoriqueAll:
     path:     /supprimerHistoriqueAll
     defaults: { _controller: ProduitBundle:HistoriqueProduit:supprimerHistoriqueAll}
+AfficherTopConsulted:
+    path:     /AfficherTopConsulted
+    defaults: { _controller: ProduitBundle:Produit:AfficherTopConsulted}
+AfficherDetailsFromBackProduit:
+    path:     /AfficherDetailsFromBackProduit/{idProduit}/{id}
+    defaults: { _controller: ProduitBundle:Produit:AfficherDetailsFromBackProduit }
+GetSearchName:
+    path:     /GetSearchName
+    defaults: { _controller: ProduitBundle:Produit:GetSearchName}
+GetSearchImage:
+    path:     /GetSearchImage
+    defaults: { _controller: ProduitBundle:Produit:GetSearchImage }
+GetSearchId:
+    path:     /GetSearchId
+    defaults: { _controller: ProduitBundle:Produit:GetSearchId }
+
 

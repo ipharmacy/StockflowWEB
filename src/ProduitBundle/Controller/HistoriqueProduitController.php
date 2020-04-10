@@ -11,6 +11,7 @@ class HistoriqueProduitController extends Controller
     function AfficherHistoriqueAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $id=$this->getUser()->getId();
         $historique = $em->getRepository("ProduitBundle:HistoriqueProduit")->findAll();
         return $this->render("@Produit/Produit/listHistorique.html.twig", array('historique' => $historique));
     }

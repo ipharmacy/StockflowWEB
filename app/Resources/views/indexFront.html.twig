@@ -57,8 +57,14 @@
           </a>
         </li>
         <li class="nav-item dropdown dropdown-slide">
-          <a class="nav-link" href="{{ path('afficherProduits') }}" >Produits<span>/</span></a>
+			<a class="nav-link" href="#"  data-toggle="dropdown">Produits
+				<span>/</span>
+			</a>
             <!-- Dropdown list -->
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{ path('afficherProduits') }}">Liste des produits</a>
+				<a class="dropdown-item" href="{{ path('AfficherTopConsulted') }}">TOP Produits</a>
+			</div>
 
         </li>
         <li class="nav-item">

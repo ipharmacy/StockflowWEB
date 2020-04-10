@@ -96,3 +96,14 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+
+vresh_twilio:
+    #(Required) Your Account SID from www.twilio.com/user/account
+    sid: 'AC05e372d344e7c393c57ef9a854e1ceb9'
+    #(Required) Your Auth Token from www.twilio.com/user/account
+    authToken: '218204d75b243e4885c0c2b35344b9c8'
+    #(Optional, default: '2010-04-01') Twilio API version
+    version: '2010-04-01'
+    #(Optional, default: 1) Number of times to retry failed requests
+    retryAttempts: 3
