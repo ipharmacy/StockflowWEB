@@ -5,6 +5,8 @@ namespace ProduitBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Tests\StringableObject;
 use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -12,6 +14,8 @@ use Symfony\Component\Validator\Constraint as Assert;
  *
  * @ORM\Table(name="produit")
  * @ORM\Entity
+ * @Vich\Uploadable
+ * @ORM\Entity(repositoryClass="ProduitBundle\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -39,9 +43,8 @@ class Produit
     private $quantite;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_categorie", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Categorie")
+     * @ORM\JoinColumn(name="idCategorie",referencedColumnName="id")
      */
     private $idCategorie;
 
@@ -73,10 +76,59 @@ class Produit
     private $idEntrepot;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="idUtilisateur", referencedColumnName="id")
+     * @var integer
+     *
+     * @ORM\Column(name="idUtilisateur", type="integer",nullable=false)
      */
     private $idUtilisateur;
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="commentaire_file", fileNameProperty="imageName", size="imageSize")
+     *
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $imageName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="archiver", type="integer",nullable=true)
+     */
+    private $archiver;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbvue", type="integer",nullable=true)
+     */
+    private $nbvue;
+
+    /**
+     * @return int
+     */
+    public function getNbvue()
+    {
+        return $this->nbvue;
+    }
+
+    /**
+     * @param int $nbvue
+     */
+    public function setNbvue($nbvue)
+    {
+        $this->nbvue = $nbvue;
+    }
+
 
     /**
      * @return int
@@ -220,6 +272,59 @@ class Produit
     public function setIdUtilisateur($idUtilisateur)
     {
         $this->idUtilisateur = $idUtilisateur;
+    }
+
+
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile(File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+    }
+
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArchiver()
+    {
+        return $this->archiver;
+    }
+
+    /**
+     * @param int $archiver
+     */
+    public function setArchiver($archiver)
+    {
+        $this->archiver = $archiver;
     }
 
 

@@ -241,13 +241,13 @@ button:hover {
 }
 
 .bg-speaker {
-  background: url(../images/background/spaeker-background.jpg) fixed no-repeat;
+  background: url(../images/background/backIndex.png) fixed no-repeat;
   background-size: cover;
   background-position: center center;
 }
 
 .bg-timer {
-  background: url(../images/background/timer-bg.jpg) no-repeat;
+  background: url(../images/background/product.jpg) fixed no-repeat;
   background-size: cover;
   background-position: center center;
 }
@@ -283,6 +283,7 @@ button:hover {
   background-size: cover;
   background-position: center center;
 }
+
 
 .bg-subscribe {
   background: url(../images/background/newsletter-bg.jpg) fixed no-repeat;
@@ -918,6 +919,10 @@ select.form-control:not([size]):not([multiple]) {
 
 .cta-subscribe {
   position: relative;
+}
+.img-fluid{
+  max-width: 100%;
+  height: auto;
 }
 
 .cta-subscribe .content {

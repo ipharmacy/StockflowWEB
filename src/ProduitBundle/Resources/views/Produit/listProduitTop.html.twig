@@ -92,114 +92,67 @@
         </div>
     </div>
 </nav>
-<section class="page-title bg-title overlay-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="title">
-                    <h3>Details</h3>
-                </div>
-                <ol class="breadcrumb p-0 m-0">
-                    <li class="breadcrumb-item"><a href="{{ path('afficherProduits') }}">Produit</a></li>
-                    <li class="breadcrumb-item active">{{ produit.nom }}</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!--====  End of Navigation Section  ====-->
-
-
-<section class="section single-speaker">
-    <div class="container">
-        <div class="block">
-            <div class="row">
-                <div class="col-lg-5 col-md-6 align-self-md-center">
-
-
-
-                    <div class="image">
-                        <div class="primary-overlay">
-                        <img src="{{ asset('../web/uploads/products/'~produit.imageName()) }}" alt="gallery-image" class="img-fluid">
-
-                            <a class="image-popup" data-effect="mfp-with-zoom" href="{{ asset('../web/uploads/products/'~produit.imageName()) }}"><i class="fa fa-picture-o"></i></a>
-
-                        </div>
-                    </div>
-
-
-                </div>
-            <div class="col-lg-7 col-md-6 align-self-center">
-
-                <div class="content-block">
-                    <div class="name"><h3>{{ produit.nom }}</h3></div>
-                    <div class="profession"><p>{{ produit.idCategorie.nom }}</p></div>
-                    <div class="details"><p>Quantité : {{ produit.quantite }} U </p><p> Prix : {{ produit.prix }} DT </p><p>Date d'ajout : {{ produit.date }} </p></div>
-                    <div class="social-profiles"><h5>Carrefour</h5></div>
-                </div>
-            </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-
-</section>
-
-<!--===========================
-=            Affichage la liste des produits            =
-============================-->
-
-<!--<section class="section speakers bg-timer overlay-lighter">
+<section class="section speakers bg-timer overlay-lighter">
     <div class="container">
         <div class="row">
             <div class="col-12">
-
+                <!-- Section Title -->
                 <div class="section-title white">
-                    <h3>Information sur<span class="alternate"> {{ produit.nom }}</span></h3>
+                    <h3>Les produits les   <span class="alternate">plus Consulté</span></h3>
 
                 </div>
             </div>
-        </div>
-        <div class="row">
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-
-
-                    <figure class="figure">
-                        <img src="{{ asset('../web/uploads/products/'~produit.imageName()) }}" class="figure-img img-fluid rounded" >
-
-                    </figure>
-
+            <div class="col-lg-6 col-md-10 mx-auto">
+                <div class="sidebar">
+                    <!-- Search Widget -->
+                    <div class="widget tags">
+                        <!-- Widget Header -->
 
 
                     </div>
-            <div class="content text-center">
-                <div class="section-title white">
-                    <h3>Nom : <span class="alternate"> {{ produit.nom }}</span></h3>
-                    <h3>Quantité : <span class="alternate"> {{ produit.quantite }} U</span></h3>
-                    <h3>Prix : <span class="alternate"> {{ produit.prix }} DT</span></h3>
-                    <h3>Entrepot : <span class="alternate"> {{ produit.idCategorie.nom }} </span></h3>
-
                 </div>
             </div>
         </div>
 
+        <div class="row">
+            {% for row in produit %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <!-- Speaker 1 -->
+                    <div class="speaker-item">
+                        <div class="image">
+                            <img src="{{ asset('../web/uploads/products/'~row.imageName()) }}" alt="View details" class="img-fluid">
+                            <div class="primary-overlay"></div>
+                            <div class="socials">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a href="{{path('details',{'idProduit':row.idProduit})}}"><i class="fa fa-eye"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
 
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content text-center">
+                            <h5><a href="{{path('details',{'idProduit':row.idProduit})}}">{{ row.nom }}</a></h5>
+                            <p>Consulté {{ row.nbvue }} fois</p>
+                            <p>Catégorie : {{ row.idCategorie.nom }}</p>
+                            <p>Prix : {{ row.prix }} DT</p>
 
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
     </div>
-
 </section>
--->
+
+
+
 <!--============================
 =            Footer            =
 =============================-->
-</body>
+
 <footer class="footer-main">
     <div class="container">
         <div class="row">
@@ -273,3 +226,26 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
