@@ -1,0 +1,40 @@
+<div class="my-address">
+    <h1>
+        Modifier les données d'un conge
+    </h1>
+    {{ form_start(form) }}
+
+    <form action="" method="POST" >
+
+        <div class="form-group col-sm-6">
+            <label> id Employe </label>
+            {{ form_widget(form.idEmploye , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.idEmploye) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Date de naissance</label>
+            {{ form_widget(form.dateConge , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.dateConge) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Nombre de jours </label>
+            {{ form_widget(form.nbJours , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.nbJours) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>attachement </label>
+            {{ form_widget(form.attachement , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.nbJours) }}</span>
+        </div>
+
+
+        <br clear="left"><br>
+        <input class="btn button-md button-theme" type="submit" value="Enregistrer">
+
+    </form>
+
+
+</div>

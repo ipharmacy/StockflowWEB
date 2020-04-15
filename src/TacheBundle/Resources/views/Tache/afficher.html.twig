@@ -1,0 +1,43 @@
+
+<h1>
+La liste des taches :
+</h1>
+
+
+{% for tache in taches %}
+    <div>
+        {{ tache.commentaire }}
+        {% if tache.etat==1 %}
+            <h5>  accomplie </h5>
+            {% else %}
+                <h5> n'est pas accomplie </h5>
+        {% endif %}
+   </div>
+{% endfor %}
+
+<div class="sidebar sidebar-widget">
+    <h3 class="title">Recherche</h3>
+
+
+    <form action="{{ path('tache_recherche') }}" method="POST" >
+        <div class="form-group">
+            <input class="form-control search-fields" placeholder="" type="text" id="commentaire" name="commentaire">
+        </div>
+
+
+        <div class="form-group">
+            <button class="search-button" type="submit">Rechercher</button>
+        </div>
+    </form>
+</div>
+
+<div class="formTriTache">
+    <form action="{{ path('tache_tri') }}" method="POST" >
+        <select name="triEmp">
+            <option value="commentaire"> Tri selon le commentaire </option>
+        </select>
+        <div class="form-group">
+            <button class="search-button" type="submit">tri</button>
+        </div>
+    </form>
+</div>

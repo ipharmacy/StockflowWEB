@@ -1,0 +1,28 @@
+<div class="my-address">
+    <h1>
+        Modifier Une tache
+    </h1>
+    {{ form_start(form) }}
+
+    <form action="" method="POST" >
+
+        <div class="form-group col-sm-6">
+            <label> id Employe </label>
+            {{ form_widget(form.idEmploye , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.idEmploye) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label> commentaire </label>
+            {{ form_widget(form.commentaire , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.commentaire) }}</span>
+        </div>
+
+
+        <br clear="left"><br>
+        <input class="btn button-md button-theme" type="submit" value="Enregistrer">
+
+    </form>
+
+
+</div>
