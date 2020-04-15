@@ -1,0 +1,39 @@
+employe_homepage:
+    path:     /
+    defaults: { _controller: EmployeBundle:Default:index }
+employe_ajout:
+    path:     /ajoutEmploye
+    defaults: { _controller: EmployeBundle:Default:ajoutEmploye }
+employe_modifier:
+    path:     /modifierEmploye/{id}
+    defaults: { _controller: EmployeBundle:Default:modifierEmploye }
+employe_afficher:
+    path:     /listEmployes
+    defaults: { _controller: EmployeBundle:Default:listEmployers }
+employe_supprimer:
+    path:     /supprimerEmploye/{id}
+    defaults: { _controller: EmployeBundle:Default:supprimerEmploye }
+employe_rechercher:
+    path:     /rechercherEmployer
+    defaults: { _controller: EmployeBundle:Default:rechercheEmploye }
+employe_tri:
+    path:     /triEmploye
+    defaults: { _controller: EmployeBundle:Default:afficheEmployeTri }
+employe_details:
+    path:     /detailsEmployes/{id}
+    defaults: { _controller: EmployeBundle:Default:detailsEmployes }
+employe_afficherRecherche:
+    path:     /afficheRecherche
+    defaults: {_controller: EmployeBundle:Default:afficherRecherche }
+employe_compte:
+    path:     /employe_compte/{id}
+    defaults: {_controller: EmployeBundle:Default:afficherCreationCompte }
+employe_ajoutCompte:
+    path:     /employe_ajoutCompte
+    defaults: {_controller: EmployeBundle:Default:ajoutEmployeUser }
+imprimer:
+    path:     /imprimer/{id}
+    defaults: { _controller: EmployeBundle:Default:imprimerEmploye }
+DisplayProfile:
+    path:     /DisplayProfile
+    defaults: { _controller: EmployeBundle:Default:DisplayProfile}

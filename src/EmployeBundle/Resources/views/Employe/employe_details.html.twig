@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('BackOffice/assets/img/logo.png')}}">
+    <link rel="icon" type="image/png" href="{{ asset('BackOffice/assets/img/logo.png')}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Gestion des Employes    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link href="{{ asset('BackOffice/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('BackOffice/assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="{{ asset('BackOffice/assets/demo/demo.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="styles. css">
+
+</head>
+
+<body class="">
+<div class="wrapper ">
+    <div class="sidebar" data-color="orange">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+      -->
+
+        <div class="sidebar-wrapper" id="sidebar-wrapper">
+            <ul class="nav">
+                <li class="active ">
+                    <a href="{{ asset('BackOffice/examples/dashboard.html')}}">
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ asset('BackOffice/examples/user.html')}}">
+                        <i class="now-ui-icons users_single-02"></i>
+                        <p>Profile utilisateur</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ asset('BackOffice/examples/icons.html')}}">
+                        <i class="now-ui-icons education_atom"></i>
+                        <p>Entrepots</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ asset('BackOffice/examples/map.html')}}">
+                        <i class="now-ui-icons location_map-big"></i>
+                        <p>Produit</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('employe_afficher')}}">
+                        <i class="now-ui-icons ui-1_bell-53"></i>
+                        <p>Employes</p>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ asset('BackOffice/examples/typography.html')}}">
+                        <i class="now-ui-icons text_caps-small"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel" id="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="{{ path ('employe_ajout') }}">ajouter un employe</a>
+                    <a class="navbar-brand" href="{{ path('tache_afficher')}}">Liste des taches</a>
+                    <a class="navbar-brand" href="{{ path('conge_afficher')}}">Liste des conges</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <form>
+                        <div class="input-group no-border">
+                            <input type="text" value="" class="form-control" placeholder="Search...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="now-ui-icons media-2_sound-wave"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Stats</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="now-ui-icons location_world"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Some Actions</span>
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="now-ui-icons users_single-02"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Account</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- END SIDEBAR USERPIC -->
+        <div class="panel-header panel-header-sm">
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-title mb-4">
+                                <div class="d-flex justify-content-start">
+                                    <div class="image-container">
+                                        <img src="{{ asset('images/')}}{{ employe.photo }}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                        <div class="middle">
+                                            <form action="{{ path('employe_compte',{'id':employe.id})}}">
+                                            <input type="submit" class="btn btn-secondary" id="btnChangePicture" value="Creer Compte" />
+                                            <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="userData ml-3">
+                                        <h2 class="d-block" style="font-size: 1.5rem; margin-top: 20px; font-weight: bold"><a href="javascript:void(0);">{{ employe.nom }} {{ employe.prenom }}</a></h2>
+
+                                    </div>
+                                    <div class="ml-auto">
+                                        <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Details Employe</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Taches affectées</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content ml-1" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Nom Complet</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.nom }} {{ employe.prenom }}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Date de Naissance</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.dateNaissance |date('d-m-Y H:i:s') }}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">CIN</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.cin}}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Email</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.mail }}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Poste</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.poste }}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Num Tel</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.numTel }}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Salaire</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.salaire }}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Date de recrutement</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{ employe.dateRecrutement |date('d-m-Y H:i:s')  }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                            {% for tache in taches %}
+                                            {{ tache.commentaire }}
+                                            {% if tache.etat==1 %}
+                                                <h5>  accomplie </h5>
+                                            {% else %}
+                                                <h5> n'est pas accomplie </h5>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!-- End Navbar -->
+
+
+        <div class="card-footer ">
+
+
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class=" container-fluid ">
+        <nav>
+            <ul>
+                <li>
+                    <a href="https://www.creative-tim.com">
+                        Creative Tim
+                    </a>
+                </li>
+                <li>
+                    <a href="http://presentation.creative-tim.com">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="http://blog.creative-tim.com">
+                        Blog
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright" id="copyright">
+            &copy; <script>
+                document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+            </script>, All rights reserved.
+        </div>
+    </div>
+</footer>
+<!--   Core JS Files   -->
+<script src="{{ asset('BackOffice/assets/js/core/jquery.min.js')}}"></script>
+<script src="{{ asset('BackOffice/assets/js/core/popper.min.js')}}"></script>
+<script src="{{ asset('BackOffice/assets/js/core/bootstrap.min.js')}}"></script>
+<script src="{{ asset('BackOffice/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="{{ asset('BackOffice/assets/js/plugins/chartjs.min.js')}}"></script>
+<!--  Notifications Plugin    -->
+<script src="{{ asset('BackOffice/assets/js/plugins/bootstrap-notify.js')}}"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{{ asset('BackOffice/assets/js/now-ui-dashboard.min.js?v=1.5.0')}}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="{{ asset('BackOffice/assets/demo/demo.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+</body>
+</html>

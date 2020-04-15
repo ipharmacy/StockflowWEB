@@ -1,0 +1,75 @@
+<div class="my-address">
+    <h1>
+        Modifier les données d'un employe
+    </h1>
+    {{ form_start(form) }}
+
+    <form action="" method="POST" >
+
+        <div class="form-group col-sm-6">
+            <label>Nom</label>
+            {{ form_widget(form.nom , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.nom) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Prenom</label>
+            {{ form_widget(form.prenom , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.prenom) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Mail</label>
+            {{ form_widget(form.mail , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.mail) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Cin</label>
+            {{ form_widget(form.cin , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.cin) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Date de naissance</label>
+            {{ form_widget(form.dateNaissance , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.dateNaissance) }}</span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label>Poste</label>
+            {{ form_widget(form.poste , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.poste) }}</span>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Num Tel</label>
+            {{ form_widget(form.numTel , { 'attr': {'class': 'form-control'} }) }}
+            <span style="color: red">{{ form_errors(form.numTel) }}</span>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label>Salaire</label>
+            {{ form_widget(form.salaire, { 'attr': {'class': 'form-control'} })  }}
+            <span style="color: red">{{ form_errors(form.salaire) }}</span>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label>Date de recrutement </label>
+            {{ form_widget(form.dateRecrutement, { 'attr': {'class': 'form-control'} })  }}
+            <span style="color: red">{{ form_errors(form.dateRecrutement) }}</span>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label>Photo </label>
+            {{ form_widget(form.image, { 'attr': {'class': 'form-control'} })  }}
+            <span style="color: red">{{ form_errors(form.image) }}</span>
+        </div>
+
+
+        <br clear="left"><br>
+        <input class="btn button-md button-theme" type="submit" value="Enregistrer">
+
+    </form>
+
+
+</div>
