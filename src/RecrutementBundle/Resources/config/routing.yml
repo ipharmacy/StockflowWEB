@@ -1,0 +1,12 @@
+recrutement_homepage:
+    path:     /
+    defaults: { _controller: RecrutementBundle:Default:index }
+recrutement_ajout:
+    path:     /ajoutRecrutement
+    defaults: { _controller: RecrutementBundle:Default:ajoutRecrutement }
+recrutement_afficher:
+    path:     /listRecrutements
+    defaults: { _controller: RecrutementBundle:Default:listRecrutements }
+recrutement_mail:
+    path:     /recrutementMail/{mail}
+    defaults: { _controller: RecrutementBundle:Default:EnvoieMailEntretien }

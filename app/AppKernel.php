@@ -23,6 +23,9 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Vresh\TwilioBundle\VreshTwilioBundle(),
             new EmployeBundle\EmployeBundle(),
+            new TacheBundle\TacheBundle(),
+            new CongeBundle\CongeBundle(),
+            new RecrutementBundle\RecrutementBundle(),
 
         ];
 

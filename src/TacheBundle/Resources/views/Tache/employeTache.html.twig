@@ -1,0 +1,10 @@
+{% for tache in taches %}
+    <div>
+        {{ tache.commentaire }}
+        {% if tache.etat==1 %}
+            <h5>  accomplie </h5>
+        {% else %}
+            <h5> n'est pas accomplie </h5>
+        {% endif %}
+    </div>
+{% endfor %}

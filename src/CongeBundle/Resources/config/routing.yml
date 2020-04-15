@@ -1,0 +1,27 @@
+conge_homepage:
+    path:     /
+    defaults: { _controller: CongeBundle:Default:index }
+conge_afficher:
+    path:     /listConges
+    defaults: { _controller: CongeBundle:Default:listConges }
+conge_ajouter:
+    path:     /ajoutConge
+    defaults: { _controller: CongeBundle:Default:ajoutConge }
+conge_modifier:
+    path:     /modifierConge/{id}
+    defaults: { _controller: CongeBundle:Default:modifierConge }
+conge_supprimer:
+    path:     /supprimerConge/{id}
+    defaults: { _controller: CongeBundle:Default:supprimerConge }
+conge_recherche:
+    path:     /rechercheConge
+    defaults: { _controller: CongeBundle:Default:rechercheConge }
+conge_tri:
+    path:     /triConge
+    defaults: { _controller: CongeBundle:Default:afficherCongeTri }
+afficherRecherche:
+    path:     /afficherRecherche
+    defaults: { _controller: CongeBundle:Default:afficherRecherche }
+damande_conge:
+    path:     /demandeConge
+    defaults: { _controller: CongeBundle:Default:DemandeConge }
