@@ -1,0 +1,30 @@
+tache_homepage:
+    path:     /
+    defaults: { _controller: TacheBundle:Default:index }
+tache_ajout:
+    path:     /ajoutTache
+    defaults: { _controller: TacheBundle:Default:ajoutTache }
+tache_modifier:
+    path:     /modifierTache/{id}
+    defaults: { _controller: TacheBundle:Default:modifierTache }
+tache_afficher:
+    path:     /listTaches
+    defaults: { _controller: TacheBundle:Default:listTaches }
+tache_supprimer:
+    path:     /supprimerTache/{id}
+    defaults: { _controller: TacheBundle:Default:supprimerTache }
+tache_recherche:
+    path:     /rechercheTache
+    defaults: { _controller: TacheBundle:Default:rechercheTache }
+tache_tri:
+    path:     /triTache
+    defaults: { _controller: TacheBundle:Default:afficheTacheTri }
+afficher_recherche:
+    path:     /afficherRecherche
+    defaults: { _controller: TacheBundle:Default:afficherRecherche }
+employeTache:
+    path:     /employetache/{id}
+    defaults: { _controller: TacheBundle:Default:afficheTacheEmploye}
+tacheEmploye:
+    path:     /tacheEmploye/{id}
+    defaults: { _controller: TacheBundle:Default:updateTache}

@@ -15,3 +15,13 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+tache:
+    resource: "@TacheBundle/Resources/config/routing.yml"
+    prefix:   /tache
+recrutement:
+    resource: "@RecrutementBundle/Resources/config/routing.yml"
+    prefix:   /recrutement
+conge:
+    resource: "@CongeBundle/Resources/config/routing.yml"
+    prefix:   /conge
+

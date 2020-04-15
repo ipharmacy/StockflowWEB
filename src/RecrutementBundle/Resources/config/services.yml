@@ -1,0 +1,4 @@
+services:
+#    recrutement.example:
+#        class: RecrutementBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

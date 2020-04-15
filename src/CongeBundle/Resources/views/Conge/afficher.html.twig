@@ -1,0 +1,47 @@
+
+<h1>
+        La Liste des Conges :
+</h1>
+
+
+{% for conge in conges %}
+    <div>
+
+        {{ conge.dateConge |date('d-m-Y H:i:s') }}
+        {{ conge.nbJours }}
+        {{ conge.attachement }}
+
+    </div>
+{% endfor %}
+
+
+<div class="sidebar sidebar-widget">
+    <h3 class="title">Recherche</h3>
+
+    <form action="{{ path('conge_recherche') }}" method="POST" >
+
+        <div class="form-group">
+            <input class="form-control search-fields" placeholder="" type="text" id="nbJours" name="nbJours">
+        </div>
+
+        <div class="form-group">
+            <input class="form-control search-fields" placeholder="" type="text" id="attachement" name="attachement">
+        </div>
+
+        <div class="form-group">
+            <button class="search-button" type="submit">Rechercher</button>
+        </div>
+    </form>
+</div>
+
+<div class="formConge">
+    <form action="{{ path('conge_tri') }}" method="POST" >
+        <select name="triEmp">
+            <option value="nbJours"> Tri selon le nombre de jours </option>
+            <option value="attachement">Tri selon l'attachement </option>
+        </select>
+        <div class="form-group">
+            <button class="search-button" type="submit">tri</button>
+        </div>
+    </form>
+</div>
