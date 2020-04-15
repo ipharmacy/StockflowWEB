@@ -8,7 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('indexBack.html.twig', array(
 
         return $this->render('indexFront.html.twig', array(
 
