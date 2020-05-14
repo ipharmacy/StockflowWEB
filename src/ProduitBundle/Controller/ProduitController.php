@@ -86,12 +86,20 @@ class ProduitController extends Controller
     }
     function SupprimerProduitAction($idProduit)
     {
-
+        $consultProduit=new consultProduit();
+        $sm=$this->getDoctrine()->getManager();
         $em=$this->getDoctrine()->getManager();
         $produit=$em->getRepository(Produit::class)->find($idProduit);
+        $consultProduit=$em->getRepository(consultProduit::class)->findBy(array('idProduit'=>$idProduit));
         $description=$this->getUser()->getUsername().' a supprimer le produit '.$produit->getNom().' le '.$produit->getDate();
         $HistoriqueProduit=new HistoriqueProduit();
         $HistoriqueProduit->setDescription($description);
+        foreach ($consultProduit as $row) {
+            $row->setConsulter(0);
+            $sm->merge($row);
+            $sm->flush();
+
+        }
         $em->remove($produit);
         $em->flush();
         $em->persist($HistoriqueProduit);
