@@ -114,7 +114,7 @@
                 </li>
                 <li class="nav-item dropdown dropdown-slide">
                     <a class="nav-link" href="#"  data-toggle="dropdown">Produits
-
+                        <span>/</span>
                     </a>
                     <!-- Dropdown list -->
                     <div class="dropdown-menu">
@@ -172,23 +172,23 @@
             <div class="col-12">
                 <!-- Section Title -->
                 <div class="section-title white">
-                    <h3>Liste des  <span class="alternate">Produits</span></h3>
+                    <h3>Liste des  <span class="alternate"> Entrepots</span></h3>
 
                 </div>
             </div>
             <div class="col-lg-6 col-md-10 mx-auto">
                 <div class="sidebar">
                     <!-- Search Widget -->
-              <!--    <form method="POST">
-                      <div class="widget search p-0">
-                          <div class="input-group">
-                              <input type="text" class="form-control main m-0"  placeholder="Search..." name="search">
+                    <!--    <form method="POST">
+                            <div class="widget search p-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control main m-0"  placeholder="Search..." name="search">
 
-                              <input class="input-group-addon" type="submit" name="submit" value="recherche">
+                                    <input class="input-group-addon" type="submit" name="submit" value="recherche">
 
-                          </div>
-                      </div>
-                  </form> -->
+                                </div>
+                            </div>
+                        </form> -->
                     <div class="widget search p-0">
                         <div class="input-group">
                             <input type="text" class="form-control main m-0"  id="search-bar" autocomplete="off">
@@ -336,10 +336,10 @@
                         <!-- Widget Header -->
                         <h5 class="widget-header">Trié par :</h5>
                         <ul class="list-inline">
-                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'prix'})}}" style="color: white">Prix</a></li>
-                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'nom'})}}" style="color: white">Nom</a></li>
-                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'date'})}}"style="color: white">Date</a></li>
-                            <li class="list-inline-item"><a href="{{path('afficherProduitTrie',{'choix':'idCategorie'})}}"style="color: white">Catégorie</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherEntrepotTrie',{'choix':'adresse'})}}" style="color: white">Adresse</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherEntrepotTrie',{'choix':'nom'})}}" style="color: white">Nom</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherEntrepotTrie',{'choix':'surface'})}}" style="color: white">Surface</a></li>
+                            <li class="list-inline-item"><a href="{{path('afficherEntrepotTrie',{'choix':'vues'})}}"style="color: white">Les plus consultés</a></li>
 
                         </ul>
                     </div>
@@ -348,30 +348,31 @@
         </div>
 
         <div class="row">
-            {% for row in produit %}
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <!-- Speaker 1 -->
-                <div class="speaker-item">
-                    <div class="image">
-                        <img src="{{ asset('../web/uploads/products/'~row.imageName()) }}" alt="View details" class="img-fluid">
-                        <div class="primary-overlay"></div>
-                        <div class="socials">
-                            <ul class="list-inline">
-                                <li class="list-inline-item"><a href="{{path('details',{'idProduit':row.idProduit})}}"><i class="fa fa-eye"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
+            {% for row in entrepot %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <!-- Speaker 1 -->
+                    <div class="speaker-item">
 
-                            </ul>
+                        <div class="image">
+                           <img src="{{ asset('../web/uploads/images/'~row.image) }}" alt="View details" class="img-fluid">
+                            <div class="primary-overlay"></div>
+                            <div class="socials">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a href="{{path('detailsEntrepot',{'identrepot':row.id})}}"><i class="fa fa-eye"></i></a></li
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content text-center">
+                            <h5><a href="{{path('detailsEntrepot',{'identrepot':row.id})}}">{{ row.nom }}</a></h5>
+                            <p>Note : {{ row.rating }} / 5 </p>
+                            <p>Surface : {{ row.longitude }} * {{ row.largitude }} m² </p>
+
                         </div>
                     </div>
-                    <div class="content text-center">
-                        <h5><a href="{{path('details',{'idProduit':row.idProduit})}}">{{ row.nom }}</a></h5>
-                        <p>Catégorie : {{ row.idCategorie.nom }}</p>
-                        <p>Prix : {{ row.prix }} DT</p>
-
-                    </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>

@@ -1,0 +1,66 @@
+entrepot_homepage:
+    path:     /
+    defaults: { _controller: EntrepotBundle:Default:index }
+
+afficherEntrepots:
+    path:     /afficherEntrepots
+    defaults: { _controller: EntrepotBundle:Entrepot:AfficherEntrepot }
+
+ajouterEntrepot:
+    path:     /ajouterEntrepot
+    defaults: { _controller: EntrepotBundle:Entrepot:ajouterEntrepot }
+supprimerEntrepot:
+    path:     /supprimerEntrepot{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:supprimerEntrepot }
+
+modifierEntrepot:
+    path:     /modifierEntrepot/{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:modifierEntrepot }
+
+
+afficherEntrepotfront:
+    path:     /afficherEntrepotfront
+    defaults: { _controller: EntrepotBundle:Entrepot:afficherEntrepotfront }
+
+detailsEntrepot:
+    path:     /detailsEntrepot/{identrepot}
+    defaults: { _controller: EntrepotBundle:Entrepot:afficherDetailsEntrepot }
+
+
+afficherEntrepotTrie:
+    path:     /afficherEntrepotTrie/{choix}
+    defaults: { _controller: EntrepotBundle:Entrepot:AfficherEntrepotTrie }
+
+ajouterRating:
+    path:     /ajouterRating
+    defaults: { _controller: EntrepotBundle:Entrepot:ajouterRating }
+
+affichageFournisseur:
+    path:     /affichageFournisseur/{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:AfficherFournisseur }
+
+supprimerFournisseur:
+    path:     /supprimerFournisseur/{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:supprimerFournisseur }
+
+ajouterFournisseur:
+    path:     /ajouterFournisseur{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:ajouterFournisseur }
+
+stats:
+    path:     /stats
+    defaults: { _controller: EntrepotBundle:Entrepot:stats}
+
+
+
+AfficherTousLesFournisseur:
+    path:     /AfficherTousLesFournisseur
+    defaults: { _controller: EntrepotBundle:Entrepot:AfficherTousLesFournisseur}
+
+Rating:
+    path:     /Rating/{entrepot}/{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:Rating }
+
+modifierfournisseur:
+    path:     /modifierfournisseur/{id}
+    defaults: { _controller: EntrepotBundle:Entrepot:modifierfournisseur }

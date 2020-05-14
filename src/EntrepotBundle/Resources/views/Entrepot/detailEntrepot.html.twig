@@ -100,8 +100,8 @@
                     <h3>Details</h3>
                 </div>
                 <ol class="breadcrumb p-0 m-0">
-                    <li class="breadcrumb-item"><a href="{{ path('afficherProduits') }}">Produit</a></li>
-                    <li class="breadcrumb-item active">{{ produit.nom }}</li>
+                    <li class="breadcrumb-item"><a href="{{ path('afficherProduits') }}">Entrepot</a></li>
+                    <li class="breadcrumb-item active">{{ entrepot.nom }}</li>
                 </ol>
             </div>
         </div>
@@ -121,24 +121,138 @@
 
                     <div class="image">
                         <div class="primary-overlay">
-                        <img src="{{ asset('../web/uploads/products/'~produit.imageName()) }}" alt="gallery-image" class="img-fluid">
+                            <img src="{{ asset('../web/uploads/images/'~entrepot.image()) }}" alt="gallery-image" class="img-fluid">
 
-                            <a class="image-popup" data-effect="mfp-with-zoom" href="{{ asset('../web/uploads/products/'~produit.imageName()) }}"><i class="fa fa-picture-o"></i></a>
+                            <a class="image-popup" data-effect="mfp-with-zoom" href="{{ asset('../web/uploads/images/'~entrepot.image()) }}"><i class="fa fa-picture-o"></i></a>
 
                         </div>
                     </div>
 
 
                 </div>
-            <div class="col-lg-7 col-md-6 align-self-center">
+                <div class="col-lg-7 col-md-6 align-self-center">
 
-                <div class="content-block">
-                    <div class="name"><h3>{{ produit.nom }}</h3></div>
-                    <div class="profession"><p>{{ produit.idCategorie.nom }}</p></div>
-                    <div class="details"><p>Quantité : {{ produit.quantite }} U </p><p> Prix : {{ produit.prix }} DT </p><p>Date d'ajout : {{ produit.date }} </p></div>
-                    <div class="social-profiles"><h5>Carrefour</h5></div>
+                    <div class="content-block">
+                        <div class="name"><h3>{{ entrepot.nom }}</h3></div>
+                        <div class="profession"><p> Adresse :{{ entrepot.adresse }}</p></div>
+                        <div class="details"><p>Surface : {{ entrepot.largitude }} * {{ entrepot.longitude }} m² </p><p> Etat : {{ entrepot.etat }}  </p><p>Note : {{ entrepot.rating }} ({{ entrepot.nb_rates}} avis)</p> <p> Consulté : {{ entrepot.vues }} fois</p></div>
+                        <div >
+                            <i onclick="choose({{ entrepot.id }},1)" class="fa fa-star "  aria-hidden="true" id="one"></i>
+                            <i onclick="choose({{ entrepot.id }},2)" class="fa fa-star "  aria-hidden="true" id="two"></i>
+                            <i onclick="choose({{ entrepot.id }},3)" class="fa fa-star "  aria-hidden="true" id="three"></i>
+                            <i onclick="choose({{ entrepot.id }},4)" class="fa fa-star "  aria-hidden="true" id="four"></i>
+                            <i onclick="choose({{ entrepot.id }},5)" class="fa fa-star "  aria-hidden="true" id="five"></i>
+                        </div>
+                        <script src="{{ asset('FrontOffice/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
+
+                        <script type="text/javascript">
+                            var  data=0;
+                            function choose(entrepot,id) {
+                                if (id==1){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one").css("color", "gold");
+                                }
+
+                                if (id==2){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two").css("color", "gold");
+                                }
+
+                                if (id==3){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three").css("color", "yellow");
+                                }
+
+                                if (id==4){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four").css("color", "gold");
+                                }
+
+                                if (id==5){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four,#five").css("color", "gold");
+                                }
+                                data=id ;
+                                 if (data==0) {
+                                     console.log("erreur")
+                                 }
+                                 else
+                                 {
+                                     $.ajax({
+                                         url:  'http://localhost/StockflowWEB/web/app_dev.php/Rating/' + entrepot + "/"+id ,
+                                         success: function (data) {
+                                             console.log(data) ;
+
+                                         },
+                                         error: function (xhr, textStatus, errorThrown) {
+                                             console.log("Ajax request failed.");
+
+                                         }
+                                     });
+                                 }
+
+                            }
+
+                           /** $(document).ready(function() {
+
+
+                                $("#one").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one").css("color", "gold");
+                                    $data=1 ;
+                                });
+
+                                $("#two").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two").css("color", "gold");
+                                    $data=2 ;
+                                });
+
+                                $("#three").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three").css("color", "yellow");
+                                    $data=3 ;
+                                    console.log($data) ;
+
+                                });
+
+                                $("#four").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four").css("color", "gold");
+                                    $data=4 ;
+                                });
+                                $("#five").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four,#five").css("color", "gold");
+                                    $data=5 ;
+                                });
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{{ path('ajouterRating') }}',
+                                    contentType: 'application/json; charset=utf-8',
+                                    data: JSON.stringify($data),
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        console.log(response);
+                                    },
+
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        console.log("ajaxxxx") ;
+                                    }
+                                });
+                            });
+**/
+                        </script>
+
+                    </div>
+                    </div>
                 </div>
-            </div>
 
             </div>
 
@@ -161,7 +275,7 @@
             <div class="col-12">
 
                 <div class="section-title white">
-                    <h3>Information sur<span class="alternate"> {{ produit.nom }}</span></h3>
+                    <h3>Information sur<span class="alternate"> {{ entrepot.nom }}</span></h3>
 
                 </div>
             </div>
@@ -172,22 +286,14 @@
 
 
                     <figure class="figure">
-                        <img src="{{ asset('../web/uploads/products/'~produit.imageName()) }}" class="figure-img img-fluid rounded" >
+                        <img src="{{ asset('../web/uploads/images/'~entrepot.image()) }}" class="figure-img img-fluid rounded" >
 
                     </figure>
 
 
 
                     </div>
-            <div class="content text-center">
-                <div class="section-title white">
-                    <h3>Nom : <span class="alternate"> {{ produit.nom }}</span></h3>
-                    <h3>Quantité : <span class="alternate"> {{ produit.quantite }} U</span></h3>
-                    <h3>Prix : <span class="alternate"> {{ produit.prix }} DT</span></h3>
-                    <h3>Entrepot : <span class="alternate"> {{ produit.idCategorie.nom }} </span></h3>
 
-                </div>
-            </div>
         </div>
 
 
