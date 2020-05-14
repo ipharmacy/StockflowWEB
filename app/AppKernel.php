@@ -26,7 +26,10 @@ class AppKernel extends Kernel
             new TacheBundle\TacheBundle(),
             new CongeBundle\CongeBundle(),
             new RecrutementBundle\RecrutementBundle(),
-
+            new EntrepotBundle\EntrepotBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
