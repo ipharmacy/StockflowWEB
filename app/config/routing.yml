@@ -1,6 +1,6 @@
 entrepot:
     resource: "@EntrepotBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /entrepot
 
 produit:
     resource: "@ProduitBundle/Resources/config/routing.yml"

@@ -77,6 +77,9 @@ class EntrepotController extends Controller
 
             $em = $this->getDoctrine()->getManager();/*on fait ça pour qu'on peut utiliser les fonction du entity manager l persist w flush*/
             $entrepot->uploadProfilePicture();
+            $entrepot->setVues(0);
+            $entrepot->setRating(0);
+            $entrepot->setNb_rates(0);
             $em->persist($entrepot);
             $em->flush();
             return $this->redirectToRoute('afficherEntrepots');
