@@ -26,14 +26,20 @@ class AppKernel extends Kernel
             new TacheBundle\TacheBundle(),
             new CongeBundle\CongeBundle(),
             new RecrutementBundle\RecrutementBundle(),
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> master
             new EntrepotBundle\EntrepotBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+<<<<<<< HEAD
 =======
             new Mgilet\NotificationBundle\MgiletNotificationBundle(),
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
