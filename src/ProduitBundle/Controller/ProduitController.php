@@ -10,6 +10,8 @@ use ProduitBundle\Form\ProduitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class ProduitController extends Controller
@@ -86,12 +88,20 @@ class ProduitController extends Controller
     }
     function SupprimerProduitAction($idProduit)
     {
-
+        $consultProduit=new consultProduit();
+        $sm=$this->getDoctrine()->getManager();
         $em=$this->getDoctrine()->getManager();
         $produit=$em->getRepository(Produit::class)->find($idProduit);
+        $consultProduit=$em->getRepository(consultProduit::class)->findBy(array('idProduit'=>$idProduit));
         $description=$this->getUser()->getUsername().' a supprimer le produit '.$produit->getNom().' le '.$produit->getDate();
         $HistoriqueProduit=new HistoriqueProduit();
         $HistoriqueProduit->setDescription($description);
+        foreach ($consultProduit as $row) {
+            $row->setConsulter(0);
+            $sm->merge($row);
+            $sm->flush();
+
+        }
         $em->remove($produit);
         $em->flush();
         $em->persist($HistoriqueProduit);
@@ -278,4 +288,12 @@ class ProduitController extends Controller
         //var_dump($result);
         return new JsonResponse($idc);
     }
+    /// *************************** MOBILE ****************************
+    public function getAllProduitAction(){
+        $result=$this->getDoctrine()->getManager()->getRepository("ProduitBundle:Produit")->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $produit=$serializer->normalize($result);
+        return new JsonResponse($produit);
+    }
+
 }

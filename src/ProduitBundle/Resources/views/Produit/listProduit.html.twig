@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('FrontOffice/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{ asset('FrontOffice/plugins/font-awsome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('FrontOffice/plugins/font-awsome/css/font-awesome.min.css')}}"  rel="stylesheet">
     <!-- Magnific Popup -->
     <link href="{{ asset('FrontOffice/plugins/magnific-popup/magnific-popup.css')}}" rel="stylesheet">
     <!-- Slick Carousel -->
@@ -108,13 +108,13 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Entrepots
+                    <a class="nav-link" href="{{ path('afficherEntrepotfront') }}">Entrepots
                         <span>/</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-slide">
                     <a class="nav-link" href="#"  data-toggle="dropdown">Produits
-                        <span>/</span>
+
                     </a>
                     <!-- Dropdown list -->
                     <div class="dropdown-menu">
@@ -240,7 +240,7 @@
                                     if (strArray[j].match(str) && $return.length < 5) {
                                         var $h = strArray[j].replace(str, "<strong>" + str + "</strong>");
                                         $pc="<img style='height: 50px;margin-left :10px;margin-right :10px;' src='/StockflowWEB/web/uploads/products/".concat($imgs[j],"'>");
-                                        $pushh="<li style='margin-left: -40px;' class='prediction-item'><a style='color: gray;' href='/StockflowWEB/web/app_dev.php/details/"+$ids[j]+"'>"+$pc+"<span class='prediction-text'>"+$h+"</span></a></li>";
+                                        $pushh="<li style='margin-left: -40px;' class='prediction-item'><a style='color: gray;' href='/StockflowWEB/web/app_dev.php/produit/details/"+$ids[j]+"'>"+$pc+"<span class='prediction-text'>"+$h+"</span></a></li>";
                                         $return.push($pushh
 
                                         );

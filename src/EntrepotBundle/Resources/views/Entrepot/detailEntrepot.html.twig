@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StockFlow</title>
+
+    <!-- PLUGINS CSS STYLE -->
+    <!-- Bootstrap -->
+    <link href="{{ asset('FrontOffice/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('FrontOffice/plugins/font-awsome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <!-- Magnific Popup -->
+    <link href="{{ asset('FrontOffice/plugins/magnific-popup/magnific-popup.css')}}" rel="stylesheet">
+    <!-- Slick Carousel -->
+    <link href="{{ asset('FrontOffice/plugins/slick/slick.css')}}" rel="stylesheet">
+    <link href="{{ asset('FrontOffice/plugins/slick/slick-theme.css')}}" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('FrontOffice/css/style.css')}}" rel="stylesheet">
+
+    <!-- FAVICON -->
+    <link href="{{ asset('FrontOffice/images/favicon.png')}}" rel="shortcut icon">
+
+</head>
+
+<body class="body-wrapper">
+
+
+<!--========================================
+=            Navigation Section            =
+=========================================-->
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+    <div class="container-fluid p-0">
+        <!-- logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('FrontOffice/images/lg.png')}}" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown active dropdown-slide">
+                    <a class="nav-link" href="#" >Home
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('afficherEntrepotfront') }}">Entrepots
+                        <span>/</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">Produits
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('afficherProduits') }}">Liste des produits</a>
+                        <a class="dropdown-item" href="{{ path('AfficherTopConsulted') }}">TOP Produits</a>
+                    </div>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Schedule<span>/</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sponsors<span>/</span></a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">News
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">News without sidebar</a>
+                        <a class="dropdown-item" href="#">News with right sidebar</a>
+                        <a class="dropdown-item" href="#">News with left sidebar</a>
+                        <a class="dropdown-item" href="#">News Single</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('back') }}">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="page-title bg-title overlay-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="title">
+                    <h3>Details</h3>
+                </div>
+                <ol class="breadcrumb p-0 m-0">
+                    <li class="breadcrumb-item"><a href="{{ path('afficherProduits') }}">Entrepot</a></li>
+                    <li class="breadcrumb-item active">{{ entrepot.nom }}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====  End of Navigation Section  ====-->
+
+
+<section class="section single-speaker">
+    <div class="container">
+        <div class="block">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 align-self-md-center">
+
+
+
+                    <div class="image">
+                        <div class="primary-overlay">
+                            <img src="{{ asset('../web/uploads/images/'~entrepot.image()) }}" alt="gallery-image" class="img-fluid">
+
+                            <a class="image-popup" data-effect="mfp-with-zoom" href="{{ asset('../web/uploads/images/'~entrepot.image()) }}"><i class="fa fa-picture-o"></i></a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-7 col-md-6 align-self-center">
+
+                    <div class="content-block">
+                        <div class="name"><h3>{{ entrepot.nom }}</h3></div>
+                        <div class="profession"><p> Adresse :{{ entrepot.adresse }}</p></div>
+                        <div class="details"><p>Surface : {{ entrepot.largitude }} * {{ entrepot.longitude }} m² </p><p> Etat : {{ entrepot.etat }}  </p><p>Note : {{ entrepot.rating }} ({{ entrepot.nb_rates}} avis)</p> <p> Consulté : {{ entrepot.vues }} fois</p></div>
+                        <div >
+                            <i onclick="choose({{ entrepot.id }},1)" class="fa fa-star "  aria-hidden="true" id="one"></i>
+                            <i onclick="choose({{ entrepot.id }},2)" class="fa fa-star "  aria-hidden="true" id="two"></i>
+                            <i onclick="choose({{ entrepot.id }},3)" class="fa fa-star "  aria-hidden="true" id="three"></i>
+                            <i onclick="choose({{ entrepot.id }},4)" class="fa fa-star "  aria-hidden="true" id="four"></i>
+                            <i onclick="choose({{ entrepot.id }},5)" class="fa fa-star "  aria-hidden="true" id="five"></i>
+                        </div>
+                        <script src="{{ asset('FrontOffice/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
+
+                        <script type="text/javascript">
+                            var  data=0;
+                            function choose(entrepot,id) {
+                                if (id==1){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one").css("color", "gold");
+                                }
+
+                                if (id==2){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two").css("color", "gold");
+                                }
+
+                                if (id==3){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three").css("color", "yellow");
+                                }
+
+                                if (id==4){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four").css("color", "gold");
+                                }
+
+                                if (id==5){
+
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four,#five").css("color", "gold");
+                                }
+                                data=id ;
+                                 if (data==0) {
+                                     console.log("erreur")
+                                 }
+                                 else
+                                 {
+                                     $.ajax({
+                                         url:  'http://localhost/StockflowWEB/web/app_dev.php/Rating/' + entrepot + "/"+id ,
+                                         success: function (data) {
+                                             console.log(data) ;
+
+                                         },
+                                         error: function (xhr, textStatus, errorThrown) {
+                                             console.log("Ajax request failed.");
+
+                                         }
+                                     });
+                                 }
+
+                            }
+
+                           /** $(document).ready(function() {
+
+
+                                $("#one").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one").css("color", "gold");
+                                    $data=1 ;
+                                });
+
+                                $("#two").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two").css("color", "gold");
+                                    $data=2 ;
+                                });
+
+                                $("#three").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three").css("color", "yellow");
+                                    $data=3 ;
+                                    console.log($data) ;
+
+                                });
+
+                                $("#four").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four").css("color", "gold");
+                                    $data=4 ;
+                                });
+                                $("#five").click(function () {
+                                    $(".fa-star").css("color", "black");
+                                    $("#one,#two,#three,#four,#five").css("color", "gold");
+                                    $data=5 ;
+                                });
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{{ path('ajouterRating') }}',
+                                    contentType: 'application/json; charset=utf-8',
+                                    data: JSON.stringify($data),
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        console.log(response);
+                                    },
+
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        console.log("ajaxxxx") ;
+                                    }
+                                });
+                            });
+**/
+                        </script>
+
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</section>
+
+<!--===========================
+=            Affichage la liste des produits            =
+============================-->
+
+<!--<section class="section speakers bg-timer overlay-lighter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="section-title white">
+                    <h3>Information sur<span class="alternate"> {{ entrepot.nom }}</span></h3>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+
+
+                    <figure class="figure">
+                        <img src="{{ asset('../web/uploads/images/'~entrepot.image()) }}" class="figure-img img-fluid rounded" >
+
+                    </figure>
+
+
+
+                    </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+-->
+<!--============================
+=            Footer            =
+=============================-->
+</body>
+<footer class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block text-center">
+                    <div class="footer-logo">
+                        <img src="{{ asset('FrontOffice/images/lgg.png')}}" alt="logo" class="img-fluid">
+                    </div>
+                    <ul class="social-links-footer list-inline">
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-vimeo"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Subfooter -->
+<footer class="subfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 align-self-center">
+                <div class="copyright-text">
+                    <p><a href="#">StockFlow</a> &#169; 2020 All Right Reserved</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- JAVASCRIPTS -->
+<!-- jQuey -->
+<script src="{{ asset('FrontOffice/plugins/jquery/jquery.js')}}"></script>
+<!-- Popper js -->
+<script src="{{ asset('FrontOffice/plugins/popper/popper.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('FrontOffice/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- Smooth Scroll -->
+<script src="{{ asset('FrontOffice/plugins/smoothscroll/SmoothScroll.min.js')}}"></script>
+<!-- Isotope -->
+<script src="{{ asset('FrontOffice/plugins/isotope/mixitup.min.js')}}"></script>
+<!-- Magnific Popup -->
+<script src="{{ asset('FrontOffice/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<!-- Slick Carousel -->
+<script src="{{ asset('FrontOffice/plugins/slick/slick.min.js')}}"></script>
+<!-- SyoTimer -->
+<script src="{{ asset('FrontOffice/plugins/syotimer/jquery.syotimer.min.js')}}"></script>
+<!-- Google Mapl -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+<script type="text/javascript" src="{{ asset('FrontOffice/plugins/google-map/gmap.js')}}"></script>
+<!-- Custom Script -->
+<script src="{{ asset('FrontOffice/js/custom.js')}}"></script>
+</body>
+
+</html>

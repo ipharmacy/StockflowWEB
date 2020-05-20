@@ -73,5 +73,9 @@ GetSearchImage:
 GetSearchId:
     path:     /GetSearchId
     defaults: { _controller: ProduitBundle:Produit:GetSearchId }
+get_produit_mobile:
+    path:     /GetAllProduit
+    defaults: { _controller: ProduitBundle:Produit:getAllProduit }
+
 
 

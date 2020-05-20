@@ -1,3 +1,7 @@
+entrepot:
+    resource: "@EntrepotBundle/Resources/config/routing.yml"
+    prefix:   /entrepot
+
 produit:
     resource: "@ProduitBundle/Resources/config/routing.yml"
     prefix:   /produit
@@ -24,4 +28,6 @@ recrutement:
 conge:
     resource: "@CongeBundle/Resources/config/routing.yml"
     prefix:   /conge
-
+mgilet_notification:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
