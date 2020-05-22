@@ -1,3 +1,11 @@
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /Forum
+
+blog:
+    resource: "@BlogBundle/Resources/config/routing.yml"
+    prefix:   /Blog
+
 entrepot:
     resource: "@EntrepotBundle/Resources/config/routing.yml"
     prefix:   /entrepot

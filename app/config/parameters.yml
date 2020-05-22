@@ -7,6 +7,6 @@ parameters:
     database_password: null
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
-    mailer_user: ipharmacywow@gmail.com
-    mailer_password: x1zx88cd23440453
+    mailer_user: khalilkhedher14@gmail.com
+    mailer_password: khalil13031997
     secret: ThisTokenIsNotSoSecretChangeIt
