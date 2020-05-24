@@ -5,7 +5,10 @@ namespace ProduitBundle\Controller;
 use ProduitBundle\Entity\Categorie;
 use ProduitBundle\Form\CategorieType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class CategorieController extends Controller
 {
@@ -39,5 +42,18 @@ class CategorieController extends Controller
         }
         return $this->render('@Produit/Produit/ajouterCategorie.html.twig',array('categorieform'=>$form->createView()
         ));
+    }
+/*Mobile*/
+    public function getAllCategorieAction(){
+        $result=$this->getDoctrine()->getManager()->getRepository(Categorie::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $cat=$serializer->normalize($result);
+        return new JsonResponse($cat);
+    }
+    public function getByIdAction($id){
+        $result=$this->getDoctrine()->getManager()->getRepository(Categorie::class)->find($id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $cat=$serializer->normalize($result);
+        return new JsonResponse($cat);
     }
 }

@@ -296,4 +296,70 @@ class ProduitController extends Controller
         return new JsonResponse($produit);
     }
 
+    public function addProduitMobileAction($nom,$quantite,$prix,$idu,$idc,$image)
+    {
+        echo "given ".$nom." ".$quantite.$prix.$idu.$idc.$image;
+        $produit = new Produit();
+        $em = $this->getDoctrine()->getManager();
+        $cat=$em->getRepository(Categorie::class)->find($idc);
+        $produit->setIdUtilisateur($idu);
+        $produit->setImageName($image);
+        $produit->setIdC($cat);
+        $produit->setNom($nom);
+        $produit->setQuantite($quantite);
+        $produit->setPrix($prix);
+
+        $produit->setArchiver(0);
+        $produit->setNbvue(0);
+        $produit->setImg("");
+        $d=new \DateTime();
+        $b=$d->format('Y-m-d H:i:s');
+        $produit->setDate($b);
+        $produit->setIdEntrepot(14);
+
+        //var_dump($produit);
+        $em->persist($produit);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+
+    }
+
+
+
+    public function EditProduitMobileAction($id,$nom,$quantite,$prix,$idu,$idc,$image)
+    {
+        echo "given ".$nom." ".$quantite.$prix.$idu.$idc.$image;
+        $em = $this->getDoctrine()->getManager();
+        $produit=$em->getRepository(Produit::class)->find($id);
+
+        $cat=$em->getRepository(Categorie::class)->find($idc);
+        $produit->setIdUtilisateur($idu);
+        $produit->setImageName($image);
+        $produit->setIdC($cat);
+        $produit->setNom($nom);
+        $produit->setQuantite($quantite);
+        $produit->setPrix($prix);
+
+        $produit->setArchiver(0);
+        $produit->setNbvue(0);
+        $produit->setImg("");
+        $d=new \DateTime();
+        $b=$d->format('Y-m-d H:i:s');
+        $produit->setDate($b);
+        $produit->setIdEntrepot(14);
+
+        //var_dump($produit);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+
+    }
+
 }

@@ -77,5 +77,18 @@ get_produit_mobile:
     path:     /GetAllProduit
     defaults: { _controller: ProduitBundle:Produit:getAllProduit }
 
+get_categorie_mobile:
+    path:     /getAllCategorie
+    defaults: { _controller: ProduitBundle:Categorie:getAllCategorie }
 
+add_Produit_Mobile:
+    path:     /addProduitMobile/{nom}/{quantite}/{prix}/{idu}/{idc}/{image}
+    defaults: { _controller: ProduitBundle:Produit:addProduitMobile }
 
+edit_Produit_Mobile:
+    path:     /EditProduitMobile/{id}/{nom}/{quantite}/{prix}/{idu}/{idc}/{image}
+    defaults: { _controller: ProduitBundle:Produit:EditProduitMobile }
+
+getById:
+    path:     /getById/{id}
+    defaults: { _controller: ProduitBundle:Categorie:getById }

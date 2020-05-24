@@ -22,8 +22,8 @@ class ProduitType extends AbstractType
                     ->add('quantite')
                     ->add('prix')
                     ->add('idCategorie',EntityType::class,array(
-                        'class'=>Categorie::class,'choice_label'=>'nom'
-                    ));
+                        'class'=>Categorie::class,'choice_label'=>'nom'))
+                    ->add('imageFile', VichImageType::class);
 
 
 

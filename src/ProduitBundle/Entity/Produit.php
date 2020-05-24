@@ -4,9 +4,9 @@ namespace ProduitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Tests\StringableObject;
-use Symfony\Component\Validator\Constraint as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -22,7 +22,7 @@ class Produit
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
+     * @ORM\Column(name="id_produit", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -30,13 +30,14 @@ class Produit
 
     /**
      * @var string
-     *
+     * @Assert/NotBlank()
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var integer
+     *
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
      */
@@ -179,6 +180,22 @@ class Produit
     }
 
     /**
+     * @return mixed
+     */
+    public function getIdC()
+    {
+        return $this->idCategorie;
+    }
+
+    /**
+     * @param mixed $idCategorie
+     */
+    public function setIdC($idCategorie)
+    {
+        $this->idCategorie = $idCategorie;
+    }
+
+    /**
      * @return int
      */
     public function getIdCategorie()
@@ -193,6 +210,8 @@ class Produit
     {
         $this->idCategorie = $idCategorie;
     }
+
+
 
     /**
      * @return float
