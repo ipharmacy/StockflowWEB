@@ -22,8 +22,8 @@ class consultProduit
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
-     * @ORM\JoinColumn(name="idProduit",referencedColumnName="id_produit")
+     *@ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
+     *@ORM\JoinColumn(name="idProduit",referencedColumnName="id_produit")
      */
     private $idProduit;
 
@@ -55,22 +55,6 @@ class consultProduit
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdProduit()
-    {
-        return $this->idProduit;
-    }
-
-    /**
-     * @param mixed $idProduit
-     */
-    public function setIdProduit($idProduit)
-    {
-        $this->idProduit = $idProduit;
     }
 
     /**
@@ -138,5 +122,22 @@ class consultProduit
     {
         return $this->consulter;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
+    }
+
+    /**
+     * @param mixed $idProduit
+     */
+    public function setIdProduit($idProduit)
+    {
+        $this->idProduit = $idProduit;
+    }
+
 }
 

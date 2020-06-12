@@ -9,6 +9,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * Produit
  *
@@ -30,20 +31,27 @@ class Produit
 
     /**
      * @var string
-     * @Assert/NotBlank()
+     *@Assert\NotBlank(
+     *     message="Le champ nom ne doit pas etre vide "
+     * )
+     *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var integer
-     *
+     *@Assert\GreaterThan(0)
+     * @Assert\NotBlank(
+     *     message="Le champ quantite ne doit pas etre vide "
+     * )
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
      */
     private $quantite;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Categorie")
      * @ORM\JoinColumn(name="idCategorie",referencedColumnName="id")
      */
@@ -51,6 +59,11 @@ class Produit
 
     /**
      * @var float
+     *@Assert\GreaterThan(0)
+     * @Assert\NotBlank(
+     *     message="Le champ prix ne doit pas etre vide "
+     * )
+     *
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
      */
@@ -90,11 +103,14 @@ class Produit
      * @Vich\UploadableField(mapping="commentaire_file", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null
+     * @Assert\NotNull
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="string")
+     *
+     *
      *
      * @var string|null
      */

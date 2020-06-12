@@ -158,6 +158,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputCity">Nom </label>
                                     {{ form_widget(categorieform.nom, { 'attr': {'class': 'form-control'} }) }}
+                                    <span style="color: red">{{ form_errors(categorieform.nom) }}</span>
                                 </div>
 
                             </div>

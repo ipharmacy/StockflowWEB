@@ -78,6 +78,26 @@ class ProduitRepository extends EntityRepository
 
 
     }
+    public function statProduitMobile($id){
+        /*return $this->getEntityManager()
+            ->createQuery('select p.idCategorie count(p.idCategorie) from ProduitBundle:Produit p GROUP BY p.idCategorie')
+            ->getResult();
+        */
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT categorie.nom, count(idCategorie) AS somme FROM categorie,produit where produit.idCategorie=categorie.id AND produit.idUtilisateur='$id' GROUP by categorie.nom"
+;
+
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+
+
+    }
     public function findTopConsulted()
     {
         return $this->getEntityManager()
