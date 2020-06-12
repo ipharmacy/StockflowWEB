@@ -46,7 +46,28 @@ class User extends BaseUser implements NotifiableInterface
      */
     protected $telephone;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255, nullable=true)
+     */
+    protected $role;
 
+    /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
 
 
 

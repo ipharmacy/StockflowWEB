@@ -2,10 +2,14 @@
 
 namespace CongeBundle\Controller;
 
+use EmployeBundle\Entity\superviser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use CongeBundle\Entity\Conge;
 use CongeBundle\Form\CongeType;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class DefaultController extends Controller
@@ -33,12 +37,31 @@ class DefaultController extends Controller
 
     public function DemandeCongeAction(Request $request)
     {
-         $id=$request->get('idEmploye');
-         var_dump($id);
-        $doctrine=$this->getDoctrine();
-        $repository=$doctrine->getRepository('CongeBundle:Conge');
-        $conges=$repository->findAll();
-        return $this->render('@Conge/Conge/conge.html.twig',array('conges'=>$conges));
+        $id=$request->get('idEmploye');
+        $idd=(int) $id;
+        $dateConge=$request->get('dateConge');
+        $datee = \DateTime::createFromFormat('Y-m-d H:i:s',$dateConge);
+        $nbJours=$request->get('nbJours');
+        $nbJourss=(int) $nbJours;
+        $em = $this->getDoctrine()->getManager();
+        $employe=$em->getRepository('EmployeBundle:Employe')->find($idd);
+        $prenom=$employe->getPrenom();
+        $conge=new Conge();
+        $super=new superviser();
+        $super->setIdEmploye($employe);
+        $conge->setIdEmploye($employe);
+        $conge->setEtat(false);
+        $conge->setNbJours($nbJourss);
+        $conge->setDateConge(new \DateTime($datee));
+        $conge->setAttachement("Demande de conge");
+        $conge->setIdUtilisateur(0);
+        $super->setIdConge($conge);
+        $super->setDate(new \DateTime('now'));
+        $super->setAction($prenom.' a demande un conge de '.$conge->getNbJours().' jours');
+        $em->persist($conge);
+        $em->persist($super);
+        $em->flush();
+        return$this->redirectToRoute('DisplayProfile');
     }
 
 
@@ -58,6 +81,25 @@ class DefaultController extends Controller
             $em->flush();
         }
         return $this->render('@Conge/Conge/modifier_conge.html.twig', array('form' => $Form->createView()));
+    }
+
+    public function validerCongeAction(Request $request)
+    {
+        $username = $this->getUser()->getUsername();
+        $userManager = $this->get('fos_user.user_manager');
+        $id=$request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $conge = $em->getRepository('CongeBundle:Conge')->find($id);
+        $conge->setEtat(true);
+        $employe=$em->getRepository("EmployeBundle:Employe")->find($conge->getIdEmploye());
+        $user=$userManager->findUserByUsername($employe->getPrenom());
+        $manager = $this->get('mgilet.notification');
+        $notif = $manager->createNotification($username." a validé votre demande de conge ");
+        $notif->setMessage('');
+        $manager->addNotification(array($user), $notif, true);
+        $em->persist($conge);
+        $em->flush();
+        return $this->redirectToRoute('conge_afficher');
     }
 
     public function listCongesAction()
@@ -117,6 +159,17 @@ class DefaultController extends Controller
     public function afficherRechercheAction()
     {
         return $this->render('@Conge/Conge/conge_recherche.html.twig');
+    }
+
+
+    public function allCongesAction()
+    {
+        $conge=$this->getDoctrine()->getManager()
+            ->getRepository('CongeBundle:Conge')
+            ->findAll();
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($conge);
+        return new JsonResponse($formatted);
     }
 
 

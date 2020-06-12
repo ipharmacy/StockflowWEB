@@ -3,6 +3,7 @@
 namespace TacheBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tache
@@ -31,6 +32,9 @@ class Tache
      * @var string
      *
      * @ORM\Column(name="commentaire", type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="Le champ commentaire ne doit pas etre vide"
+     * )
      */
     private $commentaire;
 
@@ -42,9 +46,8 @@ class Tache
     private $etat;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUtilisateur", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idUtilisateur",referencedColumnName="id")
      */
     private $idUtilisateur;
 
@@ -161,6 +164,7 @@ class Tache
      * @var \DateTime
      *
      * @ORM\Column(name="DateAttribution", type="datetime")
+     *
      */
     private $DateAttribution;
 
@@ -181,9 +185,18 @@ class Tache
     }
 
     /**
+     *
+     * @Assert\NotBlank(
+     *     message="Le champ date limite ne doit pas etre vide"
+     * )
+     * @Assert\GreaterThan(
+     *     value="today",
+     *     message="La date limite doit etre superieur a la date courante"
+     * )
      * @var \DateTime
      *
      * @ORM\Column(name="DateLimit", type="datetime")
+     *
      */
     private $DateLimit;
 

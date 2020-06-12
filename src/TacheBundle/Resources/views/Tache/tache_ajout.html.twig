@@ -154,9 +154,8 @@
 
                         <!-- My address start-->
 
-                        {{ form_start(form) }}
+                        {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
                         <div class="formulaire" style="margin-left: 4px;">
-                            <form action="" method="POST" >
                                 <br>
                                 <div class="form-row">
                                     <div class="col">
@@ -181,7 +180,6 @@
 
                                 <br>
                                 <input class="btn button-md button-theme" style="margin-left: 250px;" type="submit" value="Ajouter">
-                            </form>
                         </div>
                         {{ form_end(form) }}
 

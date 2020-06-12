@@ -6,6 +6,8 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_EMPLOYE: ROLE_EMPLOYE
+
 
     providers:
         fos_userbundle:
@@ -17,6 +19,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                use_forward: false
 
             logout:       true
             anonymous:    true

@@ -10,3 +10,25 @@ recrutement_afficher:
 recrutement_mail:
     path:     /recrutementMail/{mail}
     defaults: { _controller: RecrutementBundle:Default:EnvoieMailEntretien }
+all_recrutement:
+    path:     /all_recrutement
+    defaults: { _controller: RecrutementBundle:Default:allRecrutement }
+Entretien_employe:
+    path:     /envoieMail
+    defaults: { _controller: RecrutementBundle:Default:Entretien }
+new_recrutement:
+    path:     /newRecrutement
+    defaults: { _controller: RecrutementBundle:Default:newRecrutement }
+display_recrutement:
+    path:     /displayRecrutement
+    defaults: { _controller: RecrutementBundle:Default:displayRecrutement}
+modify_recrutement:
+    path:     /modifyRecrutement
+    defaults: { _controller: RecrutementBundle:Default:updateRecrutement}
+remove_recrutement:
+    path:     /removeRecrutement
+    defaults: { _controller: RecrutementBundle:Default:removeRecrutement}
+
+
+
+

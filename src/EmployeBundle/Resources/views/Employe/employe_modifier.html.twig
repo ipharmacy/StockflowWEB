@@ -217,20 +217,14 @@
                                         <span style="color: red">{{ form_errors(form.salaire) }}</span>
                                     </div>
                                 </div>
-                                <br>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label>Date de recrutement</label>
-                                        {{ form_widget(form.dateRecrutement, { 'attr': {'class': 'form-control'} })  }}
-                                        <span style="color: red">{{ form_errors(form.dateRecrutement) }}</span>
-                                    </div>
-                                </div>
+
+
                                 <br>
                                 <div class="form-row">
                                     <div class="col" >
                                         <label>Photo de profil</label>
-                                        {{ form_widget(form.image,{ 'attr': {'class': 'form-control-file'} }) }}
-                                        <span style="color: red">{{ form_errors(form.image) }}</span>
+                                        {{ form_widget(form.photo,{ 'attr': {'class': 'form-control-file'} }) }}
+                                        <span style="color: red">{{ form_errors(form.photo) }}</span>
                                     </div>
                                 </div>
                                 <br>

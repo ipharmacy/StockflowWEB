@@ -88,6 +88,7 @@
                     <a class="navbar-brand" href="{{ path('tache_afficher')}}">Liste des taches</a>
                     <a class="navbar-brand" href="{{ path('conge_afficher')}}">Liste des conges</a>
                     <a class="navbar-brand" href="{{ path('afficher_recherche')}}">Rechercher une tache</a>
+                    <a class="navbar-brand" href="{{ path('superviser')}}">Superviser Employes</a>
 
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,6 +164,7 @@
                     <th>Employe</th>
                     <th>Date Attribution</th>
                     <th>Date Limite</th>
+                    <th>Affectée Par</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -187,6 +189,9 @@
                         </td>
                         <td>
                             {{ tache.DateLimit |date('d-m-Y H:i:s') }}
+                        </td>
+                        <td>
+                            {{ tache.idUtilisateur.username }}
                         </td>
                         <td>
                             <a href="{{path('tache_modifier',{'id':tache.id})}}"> Modifier </a>

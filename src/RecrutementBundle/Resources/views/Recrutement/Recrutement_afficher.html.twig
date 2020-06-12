@@ -169,7 +169,7 @@
             </thead>
             <tbody>
             {% for recrutement in recrutements %}
-
+                {% if recrutement.etat == 0 %}
                 <tr>
                     <td>
                         {{ recrutement.nom }}
@@ -202,9 +202,10 @@
                         <a href="{{path('employe_supprimer',{'id':recrutement.id})}}"> Supprimer </a>
                     </td>
                     <td>
-                        <a href="{{path('recrutement_mail',{'mail':recrutement.mail})}}">Entretien</a>
+                        <a href="{{path('recrutement_mail',{'mail':recrutement.mail,'id':recrutement.id})}}">Entretien</a>
                     </td>
                 </tr>
+                {% endif %}
             {% endfor %}
 
             </tbody>

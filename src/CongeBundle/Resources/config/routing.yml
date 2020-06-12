@@ -10,6 +10,9 @@ conge_ajouter:
 conge_modifier:
     path:     /modifierConge/{id}
     defaults: { _controller: CongeBundle:Default:modifierConge }
+conge_valider:
+    path:     /validerConge/{id}
+    defaults: { _controller: CongeBundle:Default:validerConge }
 conge_supprimer:
     path:     /supprimerConge/{id}
     defaults: { _controller: CongeBundle:Default:supprimerConge }
@@ -25,3 +28,6 @@ afficherRecherche:
 damande_conge:
     path:     /demandeConge
     defaults: { _controller: CongeBundle:Default:DemandeConge }
+all_conges:
+    path:     /all_conges
+    defaults: { _controller: CongeBundle:Default:allConges }

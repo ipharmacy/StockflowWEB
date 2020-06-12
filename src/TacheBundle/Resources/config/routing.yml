@@ -28,3 +28,27 @@ employeTache:
 tacheEmploye:
     path:     /tacheEmploye/{id}
     defaults: { _controller: TacheBundle:Default:updateTache}
+allTaches:
+    path:     /allTaches
+    defaults: { _controller: TacheBundle:Default:allTaches}
+tache_new:
+    path:     /newTache
+    defaults: { _controller: TacheBundle:Default:newTache}
+delete_tache:
+    path:     /removeTache
+    defaults: { _controller: TacheBundle:Default:deleteTache}
+remuneration:
+    path:     /remunererEmploye
+    defaults: { _controller: TacheBundle:Default:remunererEmployes}
+superviser:
+    path:     /superviserEmployes
+    defaults: { _controller: TacheBundle:Default:superviserEmployes}
+raterTache:
+    path:     /raterTache
+    defaults: { _controller: TacheBundle:Default:raterTache}
+getEmpTache:
+    path:     /getEmpTache
+    defaults: { _controller: TacheBundle:Default:tachEmploy}
+validate:
+    path:     /validerTache
+    defaults: { _controller: TacheBundle:Default:ValiderTache}

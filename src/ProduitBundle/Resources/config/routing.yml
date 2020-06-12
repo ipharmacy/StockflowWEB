@@ -1,6 +1,9 @@
 produit_homepage:
     path:     /
     defaults: { _controller: ProduitBundle:Default:index }
+ekhdem:
+    path:     /ekhdem
+    defaults: { _controller: ProduitBundle:Default:ekhdem }
 afficherProduits:
     path:     /afficherProduits
     defaults: { _controller: ProduitBundle:Produit:AfficherProduit }

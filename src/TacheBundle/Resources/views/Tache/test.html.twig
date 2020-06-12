@@ -154,15 +154,6 @@
                                 <div class="d-flex justify-content-start">
                                     <div class="image-container">
                                         <img src="{{ asset('images/')}}{{ employe.photo }}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-                                        {% if test == false %}}
-                                        <div class="middle">
-                                            <form action="{{ path('employe_compte',{'id':employe.id})}}">
-                                            <input type="submit" class="btn btn-secondary" id="btnChangePicture" value="Creer Compte" />
-                                            </form>
-                                        </div>
-                                        {% endif %}
-
-
                                     </div>
                                     <div class="userData ml-3">
                                         <h2 class="d-block" style="font-size: 1.5rem; margin-top: 20px; font-weight: bold"><a href="javascript:void(0);">{{ employe.nom }} {{ employe.prenom }}</a></h2>
@@ -180,135 +171,76 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Details Employe</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Taches affectées</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#superviser" role="tab" aria-controls="superviser" aria-selected="false">Superviser Employe</a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content ml-1" id="myTabContent">
                                         <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-
-
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Nom Complet</label>
+                                                    <label style="font-weight:bold;"> Conges en cours de traitement : </label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    {{ employe.nom }} {{ employe.prenom }}
-                                                </div>
-                                            </div>
-                                            <hr />
-
-                                            <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Date de Naissance</label>
-                                                </div>
-                                                <div class="col-md-8 col-6">
-                                                    {{ employe.dateNaissance |date('d-m-Y H:i:s') }}
+                                                    {% for n in nbCongeEnCours %}
+                                                        {{ n.nbConges }}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <hr />
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">CIN</label>
+                                                    <label style="font-weight:bold;"> Conges pris : </label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    {{ employe.cin}}
-                                                </div>
-                                            </div>
-                                            <hr />
-
-                                            <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Email</label>
-                                                </div>
-                                                <div class="col-md-8 col-6">
-                                                    {{ employe.mail }}
-                                                </div>
-                                            </div>
-                                            <hr />
-
-                                            <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Poste</label>
-                                                </div>
-                                                <div class="col-md-8 col-6">
-                                                    {{ employe.poste }}
+                                                    {% for n in nbConge %}
+                                                        {{ n.nbConges }}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <hr />
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Num Tel</label>
+                                                    <label style="font-weight:bold;">Taches Effectues : </label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    {{ employe.numTel }}
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Salaire</label>
-                                                </div>
-                                                <div class="col-md-8 col-6">
-                                                    {{ employe.salaire }}
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Date de recrutement</label>
-                                                </div>
-                                                <div class="col-md-8 col-6">
-                                                    {{ employe.dateRecrutement |date('d-m-Y H:i:s')  }}
+                                                    {% for n in nbE %}
+                                                    {{ n.nbTaches }}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
 
                                             <hr />
+
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;margin-top: 13px;">Remunerer Employe </label>
+                                                    <label style="font-weight:bold;">Taches Non Effectues : </label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    <a href="{{path('remuneration',{'id':employe.id})}}">
-                                                        <input type="submit" class="btn btn-secondary" id="btnChangePicture" value="Remunerer" />
-                                                    </a>
+                                                    {% for nb in nbNE %}
+                                                        {{ nb.nbTaches }}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
+
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Augmenter Salaire : </label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    <form action="{{ path('AugmenterSalaire',{'id':employe.id})}}" method="post">
+                                                        <label> Ancien Salaire : </label>
+                                                        <input class="form-control search-fields" value="{{employe.salaire}}" type="number" disabled="disabled" id="salaire" name="salaire">
+                                                        <label> Montant a verser : </label>
+                                                        <input class="form-control search-fields"  step=any  type="number" id="montant" name="montant">
+                                                        <input type="submit" class="btn btn-secondary" id="btnChangePicture" value="Valider" />
+                                                    </form>
+                                                </div>
+                                            </div>
+
 
 
                                         </div>
                                         <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                            {% for tache in taches %}
-                                            {{ tache.commentaire }}
-                                            {% if tache.etat==1 %}
-                                                <h5>  accomplie </h5>
-                                            {% else %}
-                                                <h5> n'est pas accomplie </h5>
-                                            {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        <div class="tab-pane fade" id="superviser" role="tabpanel" aria-labelledby="superviser-tab">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-
-                                                </tr>
-                                                </thead>
-                                                {% for s in superviser %}
-                                                <tr>
-                                                    <td>
-                                                        {{ s.date | date('d-m-Y H:i:s') }}
-                                                    </td>
-                                                    <td>
-                                                        {{ s.action }}
-                                                    </td>
-                                                <tr>
-                                                    {% endfor %}
-
-                                            </table>
                                         </div>
                                     </div>
                                 </div>

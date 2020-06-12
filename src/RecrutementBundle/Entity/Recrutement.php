@@ -3,6 +3,8 @@
 namespace RecrutementBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Recrutement
@@ -25,6 +27,10 @@ class Recrutement
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     *
+     * @Assert\NotBlank(
+     *     message="le champ nom ne doit pas etre vide"
+     * )
      */
     private $nom;
 
@@ -32,6 +38,9 @@ class Recrutement
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="le champ prenom ne doit pas etre vide"
+     * )
      */
     private $prenom;
 
@@ -39,6 +48,12 @@ class Recrutement
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="Le champ Email ne doit pas etre vide "
+     * )
+     * @Assert\Email(
+     *     message="l'email {{ value }} n'est pas valide"
+     * )
      */
     private $mail;
 
@@ -46,6 +61,15 @@ class Recrutement
      * @var string
      *
      * @ORM\Column(name="cin", type="integer")
+     * @Assert\NotBlank(
+     *     message="le champ cin ne doit pas etre vide"
+     * )
+     * @Assert\Length(
+     *     min=8,
+     *     max=8,
+     *     minMessage="Le cin doit avoir 8 chiffres ",
+     *     maxMessage="le cin doit avoir 8 chiffres "
+     * )
      */
     private $cin;
 
@@ -53,6 +77,13 @@ class Recrutement
      * @var \DateTime
      *
      * @ORM\Column(name="dateNaissance", type="date")
+     * @Assert\NotBlank(
+     *     message="le champ date de naissance ne doit pas etre vide"
+     * )
+     * @Assert\LessThan(
+     *     value="-18 years",
+     *     message="vous devez avoir 18 ans pour pouvoir postuler a un job dans Stockflow"
+     * )
      */
     private $dateNaissance;
 
@@ -60,9 +91,40 @@ class Recrutement
      * @var int
      *
      * @ORM\Column(name="numTel", type="integer")
+     * @Assert\NotBlank(
+     *     message="Le champ numero de telephone ne doit pas etre vide"
+     * )
+     * @Assert\Length(
+     *     min=8,
+     *     max=8,
+     *     minMessage="Le cin doit avoir 8 chiffres ",
+     *     maxMessage="le cin doit avoir 8 chiffres "
+     * )
      */
     private $numTel;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="etat", type="integer")
+     */
+    private $etat;
+
+    /**
+     * @return int
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param int $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
 
     /**
      * Get id

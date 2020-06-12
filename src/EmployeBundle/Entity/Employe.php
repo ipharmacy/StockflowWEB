@@ -4,6 +4,8 @@ namespace EmployeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension ;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Employe
@@ -24,19 +26,32 @@ class Employe
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(
+     *     message="Le champ nom ne doit pas etre vide "
+     * )
      * @ORM\Column(name="nom", type="string", length=255)
+     *
      */
     private $nom;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(
+     *     message="Le champ prenom ne doit pas etre vide "
+     * )
      * @ORM\Column(name="prenom", type="string", length=255)
+     *
      */
     private $prenom;
 
     /**
+     *
+     * @Assert\NotBlank(
+     *     message="Le champ email ne doit pas etre vide "
+     * )
+     * @Assert\Email(
+     *     message="l'email '{{ value }}' n'est pas valide "
+     * )
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255)
@@ -44,16 +59,34 @@ class Employe
     private $mail;
 
     /**
+     *
+     * @Assert\NotBlank(
+     *     message="le champ cin doit contenir 8 chiffres"
+     * )
      * @var int
+     * @Assert\Length(
+     *     min=8,
+     *     max=8,
+     *     minMessage="Le cin doit avoir 8 chiffres ",
+     *     maxMessage="le cin doit avoir 8 chiffres "
+     * )
      *
      * @ORM\Column(name="cin", type="integer")
      */
     private $cin;
 
     /**
+     * @Assert\NotBlank(
+     *     message="Le champ date ne doit pas etre vide "
+     * )
+     * @Assert\LessThan(
+     *     value="-18 years",
+     *     message="L'employe doit avoir au moins 18 ans "
+     * )
      * @var \DateTime
      *
      * @ORM\Column(name="dateNaissance", type="date")
+     *
      */
     private $dateNaissance;
 
@@ -398,51 +431,8 @@ class Employe
 
 
 
-    private $image;
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage(UploadedFile $image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-
-    public function getUploadDir()
-    {
-        return 'images';
-    }
-
-    public function getAbsolutePath()
-    {
-        return $this->getAbsoluteRoot().'/'.$this->image->getClientOriginalName();
-    }
-
-    public function getAbsoluteRoot()
-    {
-        return __DIR__.'/../../../web/'.$this->getUploadDir().'/';
-    }
 
 
-    public function upload()
-    {
-
-        if($this->image==null)
-        {
-            return;
-        }
-        $this->photo = $this->image->getClientOriginalName();
-        if(!is_dir($this->getAbsoluteRoot()))
-        {
-            mkdir($this->getAbsoluteRoot(),'0777',true);
-        }
-        $this->image->move($this->getAbsoluteRoot(),$this->photo);
-        unset($this->image);
-
-    }
 
 
 

@@ -1,0 +1,22 @@
+
+<table class="table">
+   <thead>
+   <tr>
+
+   </tr>
+   </thead>
+{% for s in superviser %}
+   <tr>
+      <td>
+   {{ s.date | date('d-m-Y H:i:s') }}
+      </td>
+      <td>
+   {{ s.idEmploye.nom }}
+      </td>
+      <td>
+   {{ s.action }}
+      </td>
+   <tr>
+{% endfor %}
+
+</table>

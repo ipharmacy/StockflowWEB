@@ -114,9 +114,9 @@
                 <div class="content-block">
                     <h2>Postulez votre demande de <span class="alternate">Recrutement </span> ici </h2>
 
-                    {{ form_start(form) }}
+                    {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
                     <div class="formulaire" style="margin-left: 4px;">
-                        <form action="" method="POST" >
                             <br>
                             <div class="form-row">
                                 <div class="col">
@@ -163,7 +163,6 @@
                             </div>
                             <br>
                             <input class="btn button-md button-theme" type="submit" value="Postuler">
-                        </form>
                     </div>
                     {{ form_end(form) }}
                 </div>

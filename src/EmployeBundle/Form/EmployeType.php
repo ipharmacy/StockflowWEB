@@ -25,7 +25,7 @@ class EmployeType extends AbstractType
             ->add('poste')
             ->add('numTel')
             ->add('salaire')
-            ->add('image', FileType::class, array('label' => 'Image'));
+            ->add('photo',FileType::class,['mapped'=>false,'label'=>'Upload File']);
     }/**
      * {@inheritdoc}
      */

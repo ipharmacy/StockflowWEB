@@ -154,9 +154,8 @@
 
                             <!-- My address start-->
 
-                {{ form_start(form) }}
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
                         <div class="formulaire" style="margin-left: 4px;">
-                <form action="" method="POST" >
                     <br>
                     <div class="form-row">
                     <div class="col">
@@ -222,13 +221,12 @@
                     <div class="form-row">
                     <div class="col" >
                         <label>Photo de profil</label>
-                        {{ form_widget(form.image,{ 'attr': {'class': 'form-control-file'} }) }}
-                        <span style="color: red">{{ form_errors(form.image) }}</span>
+                        {{ form_widget(form.photo,{ 'attr': {'class': 'form-control-file'} }) }}
+                        <span style="color: red">{{ form_errors(form.photo) }}</span>
                     </div>
                     </div>
                    <br>
                     <input class="btn button-md button-theme" type="submit" value="Ajouter">
-                </form>
                         </div>
                 {{ form_end(form) }}
 

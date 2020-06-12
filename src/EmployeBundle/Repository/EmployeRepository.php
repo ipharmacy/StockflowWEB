@@ -21,6 +21,7 @@ class EmployeRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+
     public function TriPlusCherMoinsCher()
     {
         $query = $this->getEntityManager()->createQuery("Select p FROM EmployeBundle\Entity\Employe p ORDER BY p.salaire");
@@ -35,15 +36,21 @@ class EmployeRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function TriParPoste()
+    {
+        $query = $this->getEntityManager()->createQuery("Select p FROM EmployeBundle\Entity\Employe p ORDER BY p.poste");
+
+        return $query->getResult();
+    }
+
 
     public function RechercheEmp($id)
     {
-
         $query = $this->getEntityManager()->createQuery("Select p FROM EmployeBundle\Entity\Employe p WHERE p.id=:id")
             ->setParameter('id',$id);
         return $query->getResult();
-
     }
+
     public function RechercheEmpUser($prenom)
     {
 
@@ -52,6 +59,42 @@ class EmployeRepository extends \Doctrine\ORM\EntityRepository
         return $query->getOneOrNullResult();
 
     }
+
+    public function RecupererDate($id)
+    {
+        $query = $this->getEntityManager()->createQuery("Select DATE_FORMAT(p.dateRecrutement,'%Y') FROM EmployeBundle\Entity\Employe p WHERE p.id=:id")
+            ->setParameter('id',$id);
+        return $query->getOneOrNullResult();
+
+    }
+
+
+    public function TacheFaite($id){
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT Month(DateAttribution) as mois,count(*) as nbTaches FROM `tache` where etat = 1 and idEmploye='$id' GROUP by Month(DateAttribution)";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+    public function TacheNonFaite($id){
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT Month(DateAttribution) as mois,count(*) as nbTaches FROM `tache` where etat = 0 and idEmploye='$id' GROUP by Month(DateAttribution)";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
 
 
 

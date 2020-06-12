@@ -37,3 +37,55 @@ imprimer:
 DisplayProfile:
     path:     /DisplayProfile
     defaults: { _controller: EmployeBundle:Default:DisplayProfile}
+allEmployes:
+    path:     /allEmployes
+    defaults: { _controller: EmployeBundle:Default:allEmployes}
+AugmenterSalaire:
+    path:     /AugmenterSalaire
+    defaults: { _controller: EmployeBundle:Default:AugmenterSalaire}
+
+
+
+create_employe:
+    path:     /newEmploye
+    defaults: { _controller: EmployeBundle:EmployeMobile:newEmploye}
+find_all_employes:
+    path:     /findAllEmployes
+    defaults: { _controller: EmployeBundle:EmployeMobile:findAllEmployes }
+sort_employes_lastname:
+    path:     /sortLastName
+    defaults: { _controller: EmployeBundle:EmployeMobile:SortEmployesByLastName }
+sort_employe_salary:
+    path:     /sortsalary
+    defaults: { _controller: EmployeBundle:EmployeMobile:SortEmployesBySalary }
+sort_employe_status:
+    path:     /sortstatus
+    defaults: { _controller: EmployeBundle:EmployeMobile:TriParPoste }
+find_employ:
+    path:     /returnEmploye
+    defaults: { _controller: EmployeBundle:Default:findEmploye}
+employe_salaire:
+    path:     /afficherAugmentationSalaire/{id}
+    defaults: { _controller: EmployeBundle:Default:afficherAugmentationSalaire}
+modify_employ:
+    path:     /modifyEmploye
+    defaults: { _controller: EmployeBundle:EmployeMobile:updateEmploye}
+delete_employ:
+    path:     /removeEmploye
+    defaults: { _controller: EmployeBundle:EmployeMobile:deleteEmploye}
+send_mail:
+    path:     /sendMail
+    defaults: { _controller: EmployeBundle:EmployeMobile:SendMailToEmploye}
+notif:
+    path:     /notif
+    defaults: { _controller:EmployeBundle:Default:indexNotif}
+login:
+    path:     /loginMobile/{username}/{password}
+    defaults: { _controller:EmployeBundle:EmployeMobile:loginMobile}
+statEmp:
+    path:     /statEmpFaite
+    defaults: { _controller:EmployeBundle:EmployeMobile:statEmpFaite}
+statEmpl:
+    path:     /statEmpNonFaite
+    defaults: { _controller:EmployeBundle:EmployeMobile:statEmpNonFaite}
+

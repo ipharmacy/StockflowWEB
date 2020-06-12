@@ -2,6 +2,8 @@
 
 namespace TacheBundle\Repository;
 
+use Doctrine\DBAL\DBALException;
+
 /**
  * TacheRepository
  *
@@ -33,6 +35,20 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function getTacheEmploye($prenom)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM tache WHERE idEmploye=(SELECT id from employe where prenom='$prenom')";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 
     public function RechercheEmpTache($prenom)
     {
@@ -41,6 +57,62 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
     return $query->getResult();
     }
 
+    public function tacheEffectues()
+    {
+        $query = $this->getEntityManager()->createQuery("SELECT count(p) AS nbTache FROM TacheBundle:Tache p WHERE p.etat=1 GROUP by p.idEmploye");
+        return $query->getResult();
+    }
+
+
+    public function getTachesEffectues($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "select COUNT(*) as nbTaches FROM tache where etat=1 and idEmploye='$id'   ";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getTachesNonEffectues($id){
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "select COUNT(*) as nbTaches FROM tache where etat=0 and idEmploye='$id'   ";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getConge($id){
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "select COUNT(*) as nbConges FROM conge where etat=1 and idEmploye='$id'   ";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getCongeEnCours($id){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "select COUNT(*) as nbConges FROM conge where etat=0 and idEmploye='$id'   ";
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
 
 

@@ -15,17 +15,8 @@ class DefaultController extends Controller
     }
     public function indexBackAction()
     {
-        $user=$this->getUser();
-        if ($user !=null){
-            return $this->render('indexBack.html.twig', array(
-                'user'=>$user
 
-            ));
-        }
-        else
-        {
-            return $this->redirectToRoute("fos_user_security_login");
-        }
+            return $this->render('@FOSUser/Security/login.html.twig');
 
     }
 

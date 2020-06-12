@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Notification Dropdown</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".dropdown").hide();
+			$(".notification_icon .fa-bell").click(function(){
+				$(".dropdown").toggle();
+			})
+		});
+	</script>
+	<style>
+	@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+	*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+	}
+	.wrapper .notification_wrap .badge
+	{
+	padding: 1px 1px;
+	border-radius: 100%;
+	background-color: red;
+	color: white;
+		margin-left: 5px;
+		margin-top: 15px;
+		margin-bottom: -10px;
+	}
+	.notification_wrap{
+	width: 500px;
+	margin: 120px auto 0;
+	}
+
+	.wrapper.notification_wrap .notification_icon{
+	position: relative;
+	width: 500px;
+	height: 500px;
+	font-size: 200px;
+	margin: 0 auto;
+	text-align: center;
+	color: #605dff;
+	}
+
+	.wrapper.notification_wrap .notification_icon .fa-bell{
+	cursor: pointer;
+	width: 500px;
+
+	}
+
+	.dropdown{
+	width: 350px;
+	height: auto;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.125);
+	margin: 15px auto 0;
+	padding: 15px;
+	position: relative;
+	display: none;
+	}
+
+	.dropdown .notify_item{
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #dbdaff;
+	}
+
+	.dropdown .notify_item:last-child{
+	border-bottom: 0px;
+	}
+
+	.dropdown .notify_item .notify_img{
+	margin-right: 15px;
+	}
+	.dropdown .notify_item .notify_info p{
+	margin-bottom: 5px;
+	font-family: 'Montserrat', sans-serif;
+	}
+
+	.dropdown .notify_item .notify_info p span{
+	color: #605dff;
+	margin-left: 5px;
+	}
+
+	.dropdown .notify_item .notify_info .notify_time{
+	color: #c5c5e6;
+	font-size: 12px;
+	}
+
+	.dropdown:before{
+	content: "";
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 15px solid;
+	border-color: transparent transparent #fff transparent;
+	}
+
+	.dropdown.active{
+	display: block;
+	}
+	</style>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="notification_wrap">
+		<span class="badge">{{ mgilet_notification_unseen_count(app.user) }}</span>
+		<div class="notification_icon">
+			<i class="fas fa-bell"></i>
+		</div>
+	</div>
+</div>
+
+<div class="dropdown">
+
+	    <div class="notify_item">
+		<div class="notify_img">
+		</div>
+		<div class="notify_info">
+			<p> {{ mgilet_notification_render(app.user) }}  </p>
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>
