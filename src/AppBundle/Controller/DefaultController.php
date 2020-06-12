@@ -14,6 +14,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
+
     public function indexAction(Request $request)
     {
         $user = $this->getUser();

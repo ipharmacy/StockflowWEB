@@ -186,8 +186,11 @@ class DefaultController extends Controller
         $em->persist($employe);
         $em->flush();
         $repository2=$doctrine->getRepository('TacheBundle:Tache');
+        $test=true;
         $taches=$repository2->TacheEmploye($id);
-        return $this->render('@Employe/Employe/employe_details.html.twig',array('employe'=>$employe,'taches'=>$taches));
+        $repository3=$doctrine->getRepository('EmployeBundle:superviser');
+        $superviser=$repository3->SuperviserEmploye($id);
+        return $this->render('@Employe/Employe/employe_details.html.twig',array('superviser'=>$superviser,'test'=>$test,'employe'=>$employe,'taches'=>$taches));
     }
 
     public function ajoutEmployeUserAction(Request $request)
