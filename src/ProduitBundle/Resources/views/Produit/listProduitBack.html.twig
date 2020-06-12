@@ -151,7 +151,9 @@ back</style>
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons location_world"></i>
                                 </a>
-
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item example" style="padding-right: 58px;" > <p>Vous n'avez aucunes nouvelles consultation</p></a>
+                                </div>
                             </li>
                         {% endif %}
                         <li class="nav-item">
@@ -204,10 +206,10 @@ back</style>
                                     <th class="text-right">
                                         <div class="row">
                                             <div class="col">
-                                               supprimer
+                                               Supprimer
                                             </div>
                                             <div class="col">
-                                                archiver
+                                                Archiver
                                             </div>
                                         </div>
                                     </th>
@@ -231,19 +233,30 @@ back</style>
                                                 <img src="{{ asset('../web/uploads/products/'~row.imageName()) }}"width="80" height="60" >
                                             </td>
                                             <td>
-                                                <a href="{{path('ModifierProduit',{'idProduit':row.idProduit})}}"> Modifier </a>
+                                                <a href="{{path('ModifierProduit',{'idProduit':row.idProduit})}}">
+                                                    <img src="{{ asset('../web/uploads/products/edit.png')}}"width="80" height="60" >
+                                                </a>
                                             </td>
                                             <td class="text-right">
 
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="{{path('supprimerProduit',{'idProduit':row.idProduit})}}"> Supprimer </a>
+                                                        <a href="{{path('supprimerProduit',{'idProduit':row.idProduit})}}">
+                                                            <img src="{{ asset('../web/uploads/products/trash.png')}}"width="80" height="60" >
+                                                        </a>
+
                                                     </div>
                                                     <div class="col">
                                                         {% if row.archiver==1 %}
-                                                            <a href="{{path('desarchiverProduit',{'idProduit':row.idProduit})}}"> Desarchiver </a>
+                                                            <a href="{{path('desarchiverProduit',{'idProduit':row.idProduit})}}">
+                                                                <img src="{{ asset('../web/uploads/products/desarchive.png')}}"width="80" height="60" >
+                                                            </a>
+
                                                         {% elseif row.archiver == null %}
-                                                            <a href="{{path('archiverProduit',{'idProduit':row.idProduit})}}"> Archiver </a>
+                                                            <a href="{{path('archiverProduit',{'idProduit':row.idProduit})}}">
+                                                                <img  src="{{ asset('../web/uploads/products/archive.png')}}"width="80" height="60" >
+                                                            </a>
+
                                                         {% endif %}
                                                     </div>
                                                 </div>
