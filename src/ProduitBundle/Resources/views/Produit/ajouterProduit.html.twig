@@ -83,7 +83,7 @@
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" >Ajouter une Catégorie</a>
+                    <a class="navbar-brand" href="{{ path('AjouterCategorie')}}">Ajouter une Catégorie</a>
                     </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -156,39 +156,48 @@
                             {{ form_start(produitform,{'attr':{'novalidate':'novalidate'}}) }}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputCity">Nom </label>
-                                    {{ form_widget(produitform.nom, { 'attr': {'class': 'form-control'} }) }}
+                                    <label for="inputCity" >Nom </label>
+                                {{ form_widget(produitform.nom, { 'attr': {'class': 'form-control'} }) }}
+                                    <span style="color: red">{{ form_errors(produitform.nom) }}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputState" type="number">Quantité </label>
                                     {{ form_widget(produitform.quantite, { 'attr': {'class': 'form-control'} }) }}
+                                    <span style="color: red">{{ form_errors(produitform.quantite) }}</span>
                                 </div>
                             </div>
+
+
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputZip" type="number">Prix</label>
                                     {{ form_widget(produitform.prix, { 'attr': {'class': 'form-control'} }) }}
+                                    <span style="color: red">{{ form_errors(produitform.prix) }}</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Catégorie</label>
+                                <label for="exampleFormControlSelect1" >Catégorie</label>
                                 {{ form_widget(produitform.idCategorie, { 'attr': {'class': 'form-control'} }) }}
+                                <span style="color: red">{{ form_errors(produitform.idCategorie) }}</span>
 
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="custom-file">
+                                    <div class="custom-file" >
                                         {{ form_widget(produitform.imageFile, { 'attr' : { 'class' : 'custom-file-input','id' : 'fichier' } }) }}
+
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+
                                     </div>
+                                    <span style="color: red">{{ form_errors(produitform.imageFile) }}</span>
                                 </div>
                             </div>
 
                             <div class="form-row">
 
-                                <input type="submit" class="btn btn-primary" value="valider" />
+                                <input type="submit" class="btn btn-primary" value="valider"  />
 
                             </div>
 
@@ -204,6 +213,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
 
 
@@ -212,6 +222,8 @@
 
 
         <!-- End Navbar -->
+
+
 
         <div class="card-footer ">
 
@@ -250,6 +262,7 @@
     </div>
 </footer>
 <!--   Core JS Files   -->
+
 <script src="{{ asset('BackOffice/assets/js/core/jquery.min.js')}}"></script>
 <script src="{{ asset('BackOffice/assets/js/core/popper.min.js')}}"></script>
 <script src="{{ asset('BackOffice/assets/js/core/bootstrap.min.js')}}"></script>

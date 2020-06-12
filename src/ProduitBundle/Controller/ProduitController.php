@@ -23,9 +23,7 @@ class ProduitController extends Controller
         if($request->isMethod('POST')){
             $chaine=$request->get('search');
             $produit=$em->getRepository(Produit::class)->search($chaine);
-
         }
-
         return $this->render("@Produit/Produit/listProduit.html.twig", array('produit' => $produit));
     }
     function AfficherProduitTrieAction(Request $request,$choix)
@@ -89,7 +87,6 @@ class ProduitController extends Controller
     function SupprimerProduitAction($idProduit)
     {
         $consultProduit=new consultProduit();
-        $sm=$this->getDoctrine()->getManager();
         $em=$this->getDoctrine()->getManager();
         $produit=$em->getRepository(Produit::class)->find($idProduit);
         $consultProduit=$em->getRepository(consultProduit::class)->findBy(array('idProduit'=>$idProduit));
@@ -97,9 +94,8 @@ class ProduitController extends Controller
         $HistoriqueProduit=new HistoriqueProduit();
         $HistoriqueProduit->setDescription($description);
         foreach ($consultProduit as $row) {
-            $row->setConsulter(0);
-            $sm->merge($row);
-            $sm->flush();
+            $em->remove($row);
+            $em->flush();
 
         }
         $em->remove($produit);
@@ -128,20 +124,20 @@ class ProduitController extends Controller
             $HistoriqueProduit->setDescription($description);
             $em=$this->getDoctrine()->getManager();/*on fait ça pour qu'on peut utiliser les fonction du entity manager l persist w flush*/
             $em->persist($produit);
-            $em->flush();
             $em->persist($HistoriqueProduit);
             $em->flush();
-            //$twilio = $this->get('twilio.api');
-            //$num=$this->getUser()->getTelephone();
-            //$tel="+216".$num;
-            //$message = $twilio->account->messages->sendMessage(
-              //  '+18312285377',
-                //$tel,
-                //$description
-            //);
 
+            $twilio = $this->get('twilio.api');
+            $num=$this->getUser()->getTelephone();
+            $tel="+216".$num;
+            $message = $twilio->account->messages->sendMessage(
+                '+18312285377',
+                $tel,
+                $description
+            );
+          //  var_dump($tel);
             //get an instance of \Service_Twilio
-            //print $message->sid;
+            print $message->sid;
 
             return $this->redirectToRoute('listProduitBack');
 
@@ -289,11 +285,111 @@ class ProduitController extends Controller
         return new JsonResponse($idc);
     }
     /// *************************** MOBILE ****************************
-    public function getAllProduitAction(){
+    public function getAllProduitAction($id){
+        $result=$this->getDoctrine()->getManager()->getRepository("ProduitBundle:Produit")->findBy(array('idUtilisateur'=>$id));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $produit=$serializer->normalize($result);
+        return new JsonResponse($produit);
+    }
+    public function getAllProduitsAction(){
         $result=$this->getDoctrine()->getManager()->getRepository("ProduitBundle:Produit")->findAll();
         $serializer = new Serializer([new ObjectNormalizer()]);
         $produit=$serializer->normalize($result);
         return new JsonResponse($produit);
+    }
+    public function getTopProductMobileAction(){
+        $result=$this->getDoctrine()->getManager()->getRepository("ProduitBundle:Produit")->findTopConsulted();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $produit=$serializer->normalize($result);
+        return new JsonResponse($produit);
+    }
+
+    public function addProduitMobileAction($nom,$quantite,$prix,$idu,$idc,$image)
+    {
+        echo "given ".$nom." ".$quantite.$prix.$idu.$idc.$image;
+        $produit = new Produit();
+        $em = $this->getDoctrine()->getManager();
+        $cat=$em->getRepository(Categorie::class)->find($idc);
+        $produit->setIdUtilisateur($idu);
+        $produit->setImageName($image);
+        $produit->setIdC($cat);
+        $produit->setNom($nom);
+        $produit->setQuantite($quantite);
+        $produit->setPrix($prix);
+
+        $produit->setArchiver(0);
+        $produit->setNbvue(0);
+        $produit->setImg("");
+        $d=new \DateTime();
+        $b=$d->format('Y-m-d H:i:s');
+        $produit->setDate($b);
+        $produit->setIdEntrepot(14);
+
+        //var_dump($produit);
+        $em->persist($produit);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+
+    }
+
+
+
+    public function EditProduitMobileAction($id,$nom,$quantite,$prix,$idu,$idc,$image)
+    {
+        echo "given ".$nom." ".$quantite.$prix.$idu.$idc.$image;
+        $em = $this->getDoctrine()->getManager();
+        $produit=$em->getRepository(Produit::class)->find($id);
+
+        $cat=$em->getRepository(Categorie::class)->find($idc);
+        $produit->setIdUtilisateur($idu);
+        $produit->setImageName($image);
+        $produit->setIdC($cat);
+        $produit->setNom($nom);
+        $produit->setQuantite($quantite);
+        $produit->setPrix($prix);
+
+        $produit->setArchiver(0);
+        $produit->setNbvue(0);
+        $produit->setImg("");
+        $d=new \DateTime();
+        $b=$d->format('Y-m-d H:i:s');
+        $produit->setDate($b);
+        $produit->setIdEntrepot(14);
+
+        //var_dump($produit);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+
+    }
+    public function deleteProduitMobileAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $produit=$em->getRepository(Produit::class)->find($id);
+        $em->remove($produit);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+    }
+    public function recupererStat2MobileAction($id){
+        $idc=array();
+        $names=array();
+        //$id=$this->getUser()->getId();
+        $em=$this->getDoctrine()->getManager();
+        $result=$em->getRepository(Produit::class)->statProduitMobile($id);
+
+        //var_dump("somme : ",$idc,"nom : ",$names);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($result);
+        return new JsonResponse($formatted);
     }
 
 }

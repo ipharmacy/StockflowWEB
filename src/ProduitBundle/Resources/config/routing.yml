@@ -77,8 +77,36 @@ GetSearchId:
     path:     /GetSearchId
     defaults: { _controller: ProduitBundle:Produit:GetSearchId }
 get_produit_mobile:
-    path:     /GetAllProduit
+    path:     /GetAllProduit/{id}
     defaults: { _controller: ProduitBundle:Produit:getAllProduit }
+get_produits_mobile:
+    path:     /GetAllProduits
+    defaults: { _controller: ProduitBundle:Produit:getAllProduits }
 
+get_categorie_mobile:
+    path:     /getAllCategorie
+    defaults: { _controller: ProduitBundle:Categorie:getAllCategorie }
+
+add_Produit_Mobile:
+    path:     /addProduitMobile/{nom}/{quantite}/{prix}/{idu}/{idc}/{image}
+    defaults: { _controller: ProduitBundle:Produit:addProduitMobile }
+
+edit_Produit_Mobile:
+    path:     /EditProduitMobile/{id}/{nom}/{quantite}/{prix}/{idu}/{idc}/{image}
+    defaults: { _controller: ProduitBundle:Produit:EditProduitMobile }
+
+getById:
+    path:     /getById/{id}
+    defaults: { _controller: ProduitBundle:Categorie:getById }
+
+deleteProduitMobile:
+    path:     /deleteProduitMobile/{id}
+    defaults: { _controller: ProduitBundle:Produit:deleteProduitMobile }
+recupererStat2Mobile:
+    path:     /recupererStat2Mobile/{id}
+    defaults: { _controller: ProduitBundle:Produit:recupererStat2Mobile }
+getTopProductMobile:
+    path:     /getTopProductMobile
+    defaults: { _controller: ProduitBundle:Produit:getTopProductMobile }
 
 

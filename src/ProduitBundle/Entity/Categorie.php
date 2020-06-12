@@ -3,6 +3,7 @@
 namespace ProduitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Categorie
@@ -55,7 +56,9 @@ class Categorie
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *     message="Le nom n'est pas valide"
+     * )
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
