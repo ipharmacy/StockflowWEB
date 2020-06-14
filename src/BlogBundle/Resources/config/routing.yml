@@ -1,0 +1,50 @@
+blog_homepage:
+    path:     /
+    defaults: { _controller: BlogBundle:Default:index }
+
+blog_map:
+    path:     /sss
+    defaults: { _controller: BlogBundle:Blog:index }
+blog_add:
+    path:     /add
+    defaults: { _controller: BlogBundle:Blog:addBlog }
+blog_display:
+    path:     /Display
+    defaults: { _controller: BlogBundle:Blog:afficherBlog }
+blog_supp:
+    path:     /suppr/{id}
+    defaults: { _controller: BlogBundle:Blog:supprimerBlog }
+
+blog_edits:
+    path:     /edits/{id}
+    defaults: { _controller: BlogBundle:Blog:edit}
+Blog_affichageF:
+    path:     /affichageF
+    defaults: { _controller: BlogBundle:Blog:affichageF }
+
+Blog_affichageR:
+    path:     /affichageR/{id}
+    defaults: { _controller: BlogBundle:Blog:affichageR }
+Blog_aff:
+        path:     /a
+        defaults: { _controller: BlogBundle:Blog:a}
+ajaxsearchr:
+    path:     /rechercherF
+    defaults: { _controller: BlogBundle:Blog:search }
+    methods: GET
+Blog_sort:
+    path:     /sort/{sort}
+    defaults: { _controller: BlogBundle:Blog:sort }
+    methods:  GET
+Blog_all:
+    path:     /all
+    defaults: { _controller: BlogBundle:Blog:all }
+new:
+    path: /news
+    defaults: { _controller: BlogBundle:Blog:new }
+dele:
+    path: /deletee
+    defaults:  { _controller: BlogBundle:Blog:deletePM }
+edi:
+    path: /editpm
+    defaults: { _controller: BlogBundle:Blog:EditPM}

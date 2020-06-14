@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StockFlow</title>
+
+    <!-- PLUGINS CSS STYLE -->
+    <!-- Bootstrap -->
+    <link href="{{ asset('FrontOffice/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('FrontOffice/plugins/font-awsome/css/font-awesome.min.css')}}"  rel="stylesheet">
+    <!-- Magnific Popup -->
+    <link href="{{ asset('FrontOffice/plugins/magnific-popup/magnific-popup.css')}}" rel="stylesheet">
+    <!-- Slick Carousel -->
+    <link href="{{ asset('FrontOffice/plugins/slick/slick.css')}}" rel="stylesheet">
+    <link href="{{ asset('FrontOffice/plugins/slick/slick-theme.css')}}" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('FrontOffice/css/style.css')}}" rel="stylesheet">
+
+    <!-- FAVICON -->
+    <link href="{{ asset('FrontOffice/images/favicon.png')}}" rel="shortcut icon">
+    <style >
+        #search-bar {
+            display: block;
+            margin: 0.25em 0 0;
+            width: 100%;
+            padding: 0.25em 0.5em;
+            font-size: 1.2em;
+        }
+
+        .output {
+            list-style: none;
+            width: 100%;
+            min-height: 0px;
+            border-top: 0 !important;
+            color: #767676;
+            font-size: 0.75em;
+            transition: min-height 0.2s;
+            position: relative;
+            z-index: 5;
+        }
+
+        .output,
+        #search-bar {
+            background: #fff;
+            border: 1px solid #767676;
+        }
+
+        .prediction-item {
+            padding: 0.5em 0.75em;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .output:hover .focus {
+            background: #fff;
+            color: #767676;
+        }
+
+        .prediction-item:hover,
+        .focus,
+        .output:hover .focus:hover {
+            background: #ddd;
+            color: #333;
+        }
+
+        .prediction-item:hover {
+            cursor: pointer;
+        }
+
+        .prediction-item strong {
+            color: #333;
+        }
+        .prediction-item:hover strong {
+            color: #000;
+        }
+
+    </style>
+
+</head>
+
+<body class="body-wrapper">
+
+
+<!--========================================
+=            Navigation Section            =
+=========================================-->
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+    <div class="container-fluid p-0">
+        <!-- logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('FrontOffice/images/lg.png')}}" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown active dropdown-slide">
+                    <a class="nav-link" href="#" >Home
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('afficherEntrepotfront') }}">Entrepots
+                        <span>/</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">Produits
+
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('afficherProduits') }}">Liste des produits</a>
+                        <a class="dropdown-item" href="{{ path('AfficherTopConsulted') }}">TOP Produits</a>
+                    </div>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Schedule<span>/</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sponsors<span>/</span></a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">News
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">News without sidebar</a>
+                        <a class="dropdown-item" href="#">News with right sidebar</a>
+                        <a class="dropdown-item" href="#">News with left sidebar</a>
+                        <a class="dropdown-item" href="#">News Single</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('back') }}">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--====  End of Navigation Section  ====-->
+
+
+
+<!--============================
+=            Banner            =
+=============================-->
+
+
+
+<!--====  End of Banner  ====-->
+
+
+<!--===========================
+=            Affichage la liste des produits            =
+============================-->
+
+<section class="section speakers bg-timer overlay-lighter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Title -->
+                <div class="section-title white">
+                    <h3><span class="alternate">BLOG</span></h3>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-10 mx-auto">
+                <div class="sidebar">
+                    <!-- Search Widget -->
+                    <!--    <form method="POST">
+                            <div class="widget search p-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control main m-0"  placeholder="Search..." name="search">
+
+                                    <input class="input-group-addon" type="submit" name="submit" value="recherche">
+
+                                </div>
+                            </div>
+                        </form> -->
+                    <div class="widget tags">
+                        <!-- Widget Header -->
+
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a  style="color: white" href="{{ path('Blog_sort',{'sort':'ASC'}) }}">Ascending Sort</a></li>
+                            <li class="list-inline-item"><a href="{{ path('Blog_sort',{'sort':'DESC'}) }}" style="color: white">Descending Sort </a></li>
+
+
+                        </ul>
+                    </div>
+                    <div class="widget search p-0">
+
+                        <input type="text" id="search"  class="form-control main m-0"  placeholder="Chercher">
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="#"><span class="fa arrow">SEARCH RESULTS</span></a>
+                        <ul class="nav nav-second-level" id="entitiesNav">
+
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <br>
+
+                </form>
+            </div>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script TYPE="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('ajaxsearchr') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'blog') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[0]);
+
+                                                        entitySelector.append('<li>' +
+                                                            'Titre:<h5> <b> <br> '+value[1]+'</b></h5> </li> <a href="http://localhost/StockflowWEB/web/app_dev.php/Blog/affichageR/'+id+'"><br> <img src="'+value[2]+'" height="150" width="300"> </a> </li>') ;
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        {% for u in be %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <!-- Speaker 1 -->
+                <div class="speaker-item">
+                    <div class="image">
+                        <label  >  <img src="{{ u.type }}" width="50" class="img-fluid">
+                        <div class="primary-overlay"></div>
+                        <div class="socials">
+                            <ul class="list-inline">
+
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content text-center">
+
+                        <p>SUJET  {{  u.sujet }}</p>
+                        <p>Description : {{ u.description }} </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+    </div>
+
+</section>
+
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block text-center">
+                    <div class="footer-logo">
+                        <img src="{{ asset('FrontOffice/images/lgg.png')}}" alt="logo" class="img-fluid">
+                    </div>
+                    <ul class="social-links-footer list-inline">
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-vimeo"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Subfooter -->
+<footer class="subfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 align-self-center">
+                <div class="copyright-text">
+                    <p><a href="#">StockFlow</a> &#169; 2020 All Right Reserved</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- JAVASCRIPTS -->
+<!-- jQuey -->
+<script src="{{ asset('FrontOffice/plugins/jquery/jquery.js')}}"></script>
+<!-- Popper js -->
+<script src="{{ asset('FrontOffice/plugins/popper/popper.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('FrontOffice/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- Smooth Scroll -->
+<script src="{{ asset('FrontOffice/plugins/smoothscroll/SmoothScroll.min.js')}}"></script>
+<!-- Isotope -->
+<script src="{{ asset('FrontOffice/plugins/isotope/mixitup.min.js')}}"></script>
+<!-- Magnific Popup -->
+<script src="{{ asset('FrontOffice/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<!-- Slick Carousel -->
+<script src="{{ asset('FrontOffice/plugins/slick/slick.min.js')}}"></script>
+<!-- SyoTimer -->
+<script src="{{ asset('FrontOffice/plugins/syotimer/jquery.syotimer.min.js')}}"></script>
+<!-- Google Mapl -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+<script type="text/javascript" src="{{ asset('FrontOffice/plugins/google-map/gmap.js')}}"></script>
+<!-- Custom Script -->
+<script src="{{ asset('FrontOffice/js/custom.js')}}"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

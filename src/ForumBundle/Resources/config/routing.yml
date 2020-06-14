@@ -1,0 +1,62 @@
+forum_homepage:
+    path:     /
+    defaults: { _controller: ForumBundle:Default:index }
+publication_map:
+    path:     /s
+    defaults: { _controller: ForumBundle:Forum:indexx }
+publication_addPublication:
+    path:     /k
+    defaults: { _controller: ForumBundle:Forum:addPublication }
+    methods:  [GET, POST]
+
+publication_addPublication2:
+    path:     /kh
+    defaults: { _controller: ForumBundle:Forum:addPublication2 }
+    methods:  [GET, POST]
+
+publication_delete:
+    path:     /delete/{id}
+    defaults: { _controller: ForumBundle:Forum:delete }
+
+publication_delete2:
+    path:     /deleteh/{id}
+    defaults: { _controller: ForumBundle:Forum:delete2 }
+
+commentaire_delete:
+    path:     /delete1/{id}
+    defaults: { _controller: ForumBundle:Forum:deleteComment }
+commentaire_delete2:
+    path:     /delete1h/{id}
+    defaults: { _controller: ForumBundle:Forum:deleteComment2 }
+
+publication_supp:
+    path:     /supp/{id}
+    defaults: { _controller: ForumBundle:Forum:supp }
+publication_supp2:
+    path:     /supph/{id}
+    defaults: { _controller: ForumBundle:Forum:supp2 }
+
+commentaire_supp:
+    path:     /supp1/{id}
+    defaults: { _controller: ForumBundle:Forum:suppComment }
+commentaire_supp2:
+    path:     /supp1h/{id}
+    defaults: { _controller: ForumBundle:Forum:suppComment2 }
+
+publication_affiche:
+    path:     /affiche
+    defaults: { _controller: ForumBundle:Forum:affiche }
+publication_affiche2:
+    path:     /afficheh
+    defaults: { _controller: ForumBundle:Forum:affiche2 }
+
+publication_details:
+    path:     /details/{id}
+    defaults: { _controller: ForumBundle:Forum:details }
+publication_details2:
+    path:     /detailsh/{id}
+    defaults: { _controller: ForumBundle:Forum:details2 }
+
+publication_chart:
+    path:   /chart
+    defaults: {_controller: ForumBundle:Forum:chart }
