@@ -47,7 +47,7 @@ publication_affiche:
     path:     /affiche
     defaults: { _controller: ForumBundle:Forum:affiche }
 publication_affiche2:
-    path:     /afficheh
+    path:     /AffichageForum
     defaults: { _controller: ForumBundle:Forum:affiche2 }
 
 publication_details:

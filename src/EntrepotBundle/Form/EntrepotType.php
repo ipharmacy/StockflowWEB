@@ -28,9 +28,9 @@ class EntrepotType extends AbstractType
 
         ])->
 
-        add('nom')
+        add('nom');
 
-            ->add('Valider',SubmitType::class);
+
     }/**
      * {@inheritdoc}
      */

@@ -352,11 +352,13 @@
                     <div class="speaker-item">
 
                         <div class="image">
-                           <img src="{{ asset('../web/uploads/images/'~row.image) }}" alt="View details" class="img-fluid">
+                            <img src="{{ asset('../web/uploads/images/'~row.image) }}" alt="View details" class="img-fluid">
                             <div class="primary-overlay"></div>
                             <div class="socials">
                                 <ul class="list-inline">
-                                    <li class="list-inline-item"><a href="{{path('detailsEntrepot',{'identrepot':row.id})}}"><i class="fa fa-eye"></i></a></li
+                                    <li class="list-inline-item"><a href="{{path('detailsEntrepot',{'identrepot':row.id})}}"><i class="fa fa-eye"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
 
                                 </ul>
                             </div>

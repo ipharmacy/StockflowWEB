@@ -15,7 +15,7 @@ class ForumController extends Controller
     public function indexxaction()
     {
         $name='name';
-        $this->render('@Forum/Default/index.html.twig',array('name'=>$name));
+         $this->render('@Forum/Default/index.html.twig',array('name'=>$name));
     }
     public function addPublicationAction(Request $request)
     { //ajout publication et commentaire a travers la methode post

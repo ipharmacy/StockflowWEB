@@ -109,15 +109,23 @@ class Entrepot
     }
 
     /**
-     * Get nb_rates
-     *
-     * @return float
+     * @return int
      */
+    public function getNbRates()
+    {
+        return $this->nb_rates;
+    }
 
+
+    /**
+     * @return int
+     */
     public function getNb_rates()
     {
         return $this->nb_rates;
     }
+
+
 
     /**
      * @Assert\File(maxSize="500k") ;
@@ -176,6 +184,8 @@ class Entrepot
 
         return $this;
     }
+
+
 
     /**
      * Get rating

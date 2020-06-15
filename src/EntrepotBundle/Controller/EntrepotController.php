@@ -57,6 +57,7 @@ class EntrepotController extends Controller
         $entrepot = $em->getRepository("EntrepotBundle:Entrepot")->find($identrepot);
         $entrepot->setVues($entrepot->getVues()+1) ;
         $em->persist($entrepot);
+ dump($entrepot) ;
 
 
         $em->flush();
@@ -111,7 +112,7 @@ class EntrepotController extends Controller
         $entrepot=$em->getRepository("EntrepotBundle:Entrepot")->find($id);
         $em->remove($entrepot);
         $em->flush();
-        $this->addFlash('success',"Fournisseur supprimé");
+
         return $this->redirectToRoute('afficherEntrepots');
     }
 
@@ -146,7 +147,6 @@ class EntrepotController extends Controller
             $content = $request->getContent();
             if (!empty($content)) {
 
-
                 $params = json_decode($content, true);
                 var_dump($params);
 
@@ -154,6 +154,12 @@ class EntrepotController extends Controller
         }
         return new JsonResponse('data' , $params);
     }
+
+
+
+
+
+
 
     function RatingAction($entrepot,$id)
     {
@@ -201,7 +207,7 @@ class EntrepotController extends Controller
 
         $em->remove($fournisseur);
         $em->flush();
-        $this->addFlash('success',"Fournisseur supprimé");
+       
         return $this->redirectToRoute('afficherEntrepots');
 
 
@@ -234,15 +240,28 @@ class EntrepotController extends Controller
         return $this->render('@Entrepot/Fournisseur/ajouterFounisseur.html.twig', array('fournisseurform' => $Form->createView()));
     }
 
+    function rechercherentrepotAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entrepots = $em->getRepository("EntrepotBundle:Entrepot")->findAll();
+
+
+
+        return $this->render("@Entrepot/Entrepot/recherchefront.html.twig", array('entrepot' => $entrepots));
+    }
+
     function statsAction()
     {
         $pieChart = new PieChart();
         $em= $this->getDoctrine();
-        //$id_user = $this->getUser()->getId();
-        $entrepots= $em->getRepository(Entrepot::class)->findAll () ;//Byiduser($id_user) ;
+        $id_user = $this->getUser()->getId();
+        $entrepots= $em->getRepository(Entrepot::class)->findAllByiduser($id_user) ;
         $totalvues=0;
+
         foreach($entrepots as $e) {
-            $totalvues=$totalvues+$e->getVues();
+
+            $totalvues=$totalvues+$e['vues'];
         }
 
 
@@ -255,13 +274,13 @@ class EntrepotController extends Controller
         foreach($entrepots as $entrepots) {
             $stat=array();
 
-            dump($entrepots->getVues()) ;
 
-            array_push($stat,$entrepots->getNom(),(($entrepots->getVues()) *100)/$totalvues);
-            $nb=($entrepots->getVues() *100)/$totalvues;
+
+            array_push($stat,$entrepots['nom'],(($entrepots['vues']) *100)/$totalvues); //Empile un ou plusieurs éléments à la fin d'un tableau
+            $nb=($entrepots['vues'] *100)/$totalvues;
             dump($nb) ;
 
-            $stat=[$entrepots->getNom(),$nb];
+            $stat=[$entrepots['nom'],$nb];
             array_push($data,$stat);
         }
 

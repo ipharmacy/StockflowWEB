@@ -19,6 +19,9 @@ employe:
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /User
+entrepot_mobile:
+    resource: "@EntrepotMobileBundle/Resources/config/routing.yml"
+    prefix:   /entrepotmobile
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

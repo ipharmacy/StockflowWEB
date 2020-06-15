@@ -31,6 +31,12 @@ afficherEntrepotTrie:
     path:     /afficherEntrepotTrie/{choix}
     defaults: { _controller: EntrepotBundle:Entrepot:AfficherEntrepotTrie }
 
+
+
+rechercherentrepot:
+    path:     /rechercherentrepot
+    defaults: { _controller: EntrepotBundle:Entrepot:rechercherentrepot }
+
 ajouterRating:
     path:     /ajouterRating
     defaults: { _controller: EntrepotBundle:Entrepot:ajouterRating }

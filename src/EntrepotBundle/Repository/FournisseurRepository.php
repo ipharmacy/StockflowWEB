@@ -14,7 +14,7 @@ class FournisseurRepository extends \Doctrine\ORM\EntityRepository
     public function get_tous_fournisseurs($entrepot )
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT r.Nom,r.Prenom,r.type,r.Quantite ,r.id FROM fournisseur r INNER JOIN entrepot e  where (e.id=r.Id_entrepot) and (e.id=$entrepot) ";
+        $sql = "SELECT r.Nom,r.Prenom,r.type,r.produit,r.Quantite ,r.id FROM fournisseur r INNER JOIN entrepot e  where (e.id=r.Id_entrepot) and (e.id=$entrepot) ";
         try {
             $stmt = $conn->prepare($sql);
         } catch (DBALException $e) {

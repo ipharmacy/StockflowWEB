@@ -197,10 +197,6 @@
                                                 <th>
                                                     DESCRIPTION
                                                 </th>
-
-                                                <th>
-                                                    IMAGE
-                                                </th>
                                                 <th>
                                                     DELETE
                                                 </th>
@@ -219,9 +215,7 @@
                                                         <label class="text-primary" > {{ b.description}} </label>
                                                     </td>
 
-                                                    <td class="btn-dark">
-                                                        <label  >  <img src="C:/Users/Khalil/Downloads/{{ b.type }}" width="50">
-                                                    </td>
+
                                                     <td class="btn-dark">
                                                         <labe class=""> <a href="{{ path('blog_supp', { 'id': b.id }) }}"> delete</a></labe>
                                                     </td>

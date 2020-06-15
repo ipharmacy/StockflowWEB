@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Mgilet\NotificationBundle\MgiletNotificationBundle(),
             new BlogBundle\BlogBundle(),
             new ForumBundle\ForumBundle(),
+            new EntrepotMobileBundle\EntrepotMobileBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

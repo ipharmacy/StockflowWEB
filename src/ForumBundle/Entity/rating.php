@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * rating
  *
- * @ORM\Table(name="rating")
+ * @ORM\Table(name="ratingKh")
  * @ORM\Entity(repositoryClass="ForumBundle\Repository\ratingRepository")
  */
 class rating

@@ -97,6 +97,20 @@ class EntrepotRepository extends \Doctrine\ORM\EntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function statistique_entrepot($idU)
+    {
 
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql = "SELECT (a.vues) as nombre,a.nom FROM `entrepot` a where idUtilisateur=$idU GROUP by a.nom ";
+
+        try {
+            $stmt = $conn->prepare($sql);
+        } catch (DBALException $e) {
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+
+    }
 
 }

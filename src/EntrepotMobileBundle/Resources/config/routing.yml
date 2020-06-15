@@ -1,0 +1,28 @@
+entrepot_mobile_homepage:
+    path:     /
+    defaults: { _controller: EntrepotMobileBundle:Default:index }
+
+AllEntrepot:
+    path:    /AllEntrepot
+    defaults: { _controller: EntrepotMobileBundle:EntrepotMobile:AllEntrepot}
+
+AddEntrepot:
+    path:    /AddEntrepot
+    defaults: { _controller: EntrepotMobileBundle:EntrepotMobile:AddEntrepot}
+
+removeEntrepot:
+    path:    /removeEntrepot
+    defaults: { _controller: EntrepotMobileBundle:EntrepotMobile:removeEntrepot}
+
+editEntrepot:
+    path:    /editEntrepot
+    defaults: { _controller: EntrepotMobileBundle:EntrepotMobile:editEntrepot}
+
+statEntrepot:
+    path:    /statEntrepot
+    defaults: { _controller: EntrepotMobileBundle:EntrepotMobile:Stat}
+
+
+
+
+

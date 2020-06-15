@@ -135,7 +135,7 @@
                     <div class="content-block">
                         <div class="name"><h3>{{ entrepot.nom }}</h3></div>
                         <div class="profession"><p> Adresse :{{ entrepot.adresse }}</p></div>
-                        <div class="details"><p>Surface : {{ entrepot.largitude }} * {{ entrepot.longitude }} m² </p><p> Etat : {{ entrepot.etat }}  </p><p>Note : {{ entrepot.rating }} ({{ entrepot.nb_rates}} avis)</p> <p> Consulté : {{ entrepot.vues }} fois</p></div>
+                        <div class="details"><p>Surface : {{ entrepot.largitude }} * {{ entrepot.longitude }} m² </p><p> Etat : {{ entrepot.etat }}  </p><p>Note : {{ entrepot.rating }} ({{ entrepot.nb_rates }} avis)</p> <p> Consulté : {{ entrepot.vues }} fois</p></div>
                         <div >
                             <i onclick="choose({{ entrepot.id }},1)" class="fa fa-star "  aria-hidden="true" id="one"></i>
                             <i onclick="choose({{ entrepot.id }},2)" class="fa fa-star "  aria-hidden="true" id="two"></i>
@@ -184,7 +184,7 @@
                                  else
                                  {
                                      $.ajax({
-                                         url:  'http://localhost/StockflowWEB/web/app_dev.php/Rating/' + entrepot + "/"+id ,
+                                         url:  'http://localhost:8080/StockflowWEB/web/app_dev.php/entrepot/Rating/' + entrepot + "/"+id ,
                                          success: function (data) {
                                              console.log(data) ;
 

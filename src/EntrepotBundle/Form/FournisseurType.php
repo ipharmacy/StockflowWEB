@@ -30,7 +30,7 @@ class FournisseurType extends AbstractType
         add('quantite')
 
             ->add('captcha', CaptchaType::class)
-            ->add('produit') ->add('Valider',SubmitType::class);
+            ->add('produit') ;
     }/**
      * {@inheritdoc}
      */
