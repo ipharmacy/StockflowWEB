@@ -1,0 +1,33 @@
+commande_homepage:
+    path:     /
+    defaults: { _controller: CommandeBundle:Default:index }
+
+add_basket:
+    path:     /add/{id}
+    defaults: { _controller: CommandeBundle:Commande:add }
+afficher_panier:
+    path:     /basket
+    defaults: { _controller: CommandeBundle:Commande:view}
+delete_basket:
+    path:     /delete/{id}
+    defaults: { _controller: CommandeBundle:Commande:delete }
+valider_panier:
+    path:     /valider
+    defaults: { _controller: CommandeBundle:Commande:ValiderPanier }
+Afficher_commande:
+    path: /Afficher
+    defaults: { _controller: CommandeBundle:Commande:ListCommande }
+Gerer_commande:
+    path: /gerer_Commande/{id}/{token}
+    defaults: { _controller: CommandeBundle:Commande:GererDemande }
+Facture_pdf:
+    path: /Facture/{ids}/
+    defaults: { _controller: CommandeBundle:Commande:FacturePdf }
+Gerer_commande_mobile:
+  path: /gerer_Commande_mobile
+  defaults: { _controller: CommandeBundle:Commande:ValiderPanierMobile }
+
+
+
+
+

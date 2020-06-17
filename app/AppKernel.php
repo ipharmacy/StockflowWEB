@@ -28,12 +28,14 @@ class AppKernel extends Kernel
             new RecrutementBundle\RecrutementBundle(),
             new EntrepotBundle\EntrepotBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Mgilet\NotificationBundle\MgiletNotificationBundle(),
             new BlogBundle\BlogBundle(),
             new ForumBundle\ForumBundle(),
             new EntrepotMobileBundle\EntrepotMobileBundle(),
+            new CommandeBundle\CommandeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

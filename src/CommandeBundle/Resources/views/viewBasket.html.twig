@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StockFlow</title>
+
+    <!-- PLUGINS CSS STYLE -->
+    <!-- Bootstrap -->
+    <link href="{{ asset('FrontOffice/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('FrontOffice/plugins/font-awsome/css/font-awesome.min.css')}}"  rel="stylesheet">
+    <!-- Magnific Popup -->
+    <link href="{{ asset('FrontOffice/plugins/magnific-popup/magnific-popup.css')}}" rel="stylesheet">
+    <!-- Slick Carousel -->
+    <link href="{{ asset('FrontOffice/plugins/slick/slick.css')}}" rel="stylesheet">
+    <link href="{{ asset('FrontOffice/plugins/slick/slick-theme.css')}}" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('FrontOffice/css/style.css')}}" rel="stylesheet">
+
+    <!-- FAVICON -->
+    <link href="{{ asset('FrontOffice/images/favicon.png')}}" rel="shortcut icon">
+    <style >
+
+        #search-bar {
+            display: block;
+            margin: 0.25em 0 0;
+            width: 100%;
+            padding: 0.25em 0.5em;
+            font-size: 1.2em;
+        }
+
+        .output {
+            list-style: none;
+            width: 100%;
+            min-height: 0px;
+            border-top: 0 !important;
+            color: #767676;
+            font-size: 0.75em;
+            transition: min-height 0.2s;
+            position: relative;
+            z-index: 5;
+        }
+
+        .output,
+        #search-bar {
+            background: #fff;
+            border: 1px solid #767676;
+        }
+
+        .prediction-item {
+            padding: 0.5em 0.75em;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .output:hover .focus {
+            background: #fff;
+            color: #767676;
+        }
+
+        .prediction-item:hover,
+        .focus,
+        .output:hover .focus:hover {
+            background: #ddd;
+            color: #333;
+        }
+
+        .prediction-item:hover {
+            cursor: pointer;
+        }
+
+        .prediction-item strong {
+            color: #333;
+        }
+        .prediction-item:hover strong {
+            color: #000;
+        }
+
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 14px/22px "Lato", Arial, sans-serif;
+            background: #fff;
+        }
+
+        .lighter-text {
+            color: #ABB0BE;
+        }
+
+        .main-color-text {
+            color: #6394F8 ;
+        }
+
+        nav {
+            padding: 20px 0 40px 0;
+            background: #F8F8F8;
+            font-size: 16px;
+        }
+        .navbar-left {
+            float: left;
+        }
+
+        .navbar-right {
+            float: right;
+        }
+
+
+        li {
+            display: inline;
+            padding-left: 20px;}
+        a {
+            color: #777777;
+            text-decoration: none;
+
+
+        }
+
+        .containr {
+            margin: auto;
+            width: 80%;
+        }
+
+        .badge {
+            background-color: #6394F8;
+            border-radius: 10px;
+            color: white;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1;
+            padding: 3px 7px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .shopping-cart {
+            margin: 20px 0;
+            float: right;
+            background: white;
+            width: 320px;
+            position: relative;
+            border-radius: 3px;
+            padding: 20px;}
+
+
+        .shopping-cart-header {
+            border-bottom: 1px solid #E8E8E8;
+            padding-bottom: 15px;
+        }
+        .shopping-cart-total {
+            float: right;
+        }
+
+
+        .shopping-cart-items {
+
+            padding-top: 20px;}
+
+        li {
+            margin-bottom: 18px;
+        }
+
+        img {
+            float: left;
+            margin-right: 12px;
+        }
+
+        .item-name {
+            display: block;
+            padding-top: 10px;
+            font-size: 16px;
+        }
+
+        .item-price {
+            color: #6394F8;
+            margin-right: 8px;
+        }
+
+        .item-quantity {
+            color: #ABB0BE;
+        }
+
+
+        .shopping-cart:after {
+            bottom: 100%;
+            left: 89%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-bottom-color: white;
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        .cart-icon {
+            color: #515783;
+            font-size: 24px;
+            margin-right: 7px;
+            float: left;
+        }
+
+        .button {
+            background: #6394F8;
+            color:white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+            border-radius: 3px;
+            font-size: 16px;
+            margin: 25px 0 15px 0;
+
+
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    </style>
+
+</head>
+
+<body class="body-wrapper">
+
+
+<!--========================================
+=            Navigation Section            =
+=========================================-->
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+    <div class="container-fluid p-0">
+        <!-- logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('FrontOffice/images/lg.png')}}" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown active dropdown-slide">
+                    <a class="nav-link" href="#" >Home
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('afficherEntrepotfront') }}">Entrepots
+                        <span>/</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">Produits
+                        <span>/</span>
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('afficherProduits') }}">Liste des produits</a>
+                        <a class="dropdown-item" href="{{ path('AfficherTopConsulted') }}">TOP Produits</a>
+                    </div>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('recrutement_ajout') }}">Demande de recrutement
+                        <span>/</span>
+                    </a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('publication_affiche2') }}">Forum
+                        <span>/</span>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('Blog_affichageF') }}">Blog
+                        <span>/</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('afficher_panier') }}">Panier</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+
+
+<!--====  End of Navigation Section  ====-->
+
+
+
+<!--============================
+=            Banner            =
+=============================-->
+
+
+
+<!--====  End of Banner  ====-->
+
+
+<!--===========================
+=            Affichage la liste des produits            =
+============================-->
+
+<section class="section speakers bg-time ">
+
+    {{ render(controller('CommandeBundle:Commande:menu')) }}
+    <br><br><br><br>
+    {% set totalHT = 0 %}
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="text-center p-5 shadow rounded">
+                 {# {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}#}
+
+                <h2>Votre panier</h2>
+                <br><br>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom du Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th>Total </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if products|length == 0 %}
+                        <tr>
+                            <td colspan="4">Aucun article dans votre panier</td>
+                        </tr>
+                    {% endif %}
+                    {% for product in products %}
+                        <form method="GET" action="{{ path('add_basket' , {'id' : product.idProduit }) }}">
+                            <tr>
+                                <td>{{ product.nom }}</td>
+                                <td>
+                                    <select name="qte" class="span1" onchange="this.form.submit()">
+                                        {% for i in 1..10 %}
+                                            <option value="{{ i }}" {% if i == basket[product.idProduit] %} selected="selected" {% endif %} >{{ i }}</option>
+                                        {% endfor %}
+                                    </select>&nbsp;
+                                    <a href="{{ path('delete_basket', {'id' : product.idProduit}) }}"><i
+                                                class="fa fa-trash"></i></a>
+                                </td>
+                                <td> {{ product.prix }} Dt</td>
+                                <td> {{ product.prix * basket[product.idProduit] }} Dt</td>
+                            </tr>
+                            {% set totalHT = totalHT + (product.prix * basket[product.idProduit]) %}
+{#                            {% set totalTTC = totalTTC + (product.price * basket[product.id])|taxe(product.taxe.rate) %}#}
+                        </form>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td>
+                        </td>
+                        <td></td>
+                        <td> Total : {{ totalHT }} Dt</td>
+                    </tr>
+                    </tbody>
+                </table>
+          {#      {% set totalTaxe = totalTTC - totalHT %}
+                {% if products|length != 0 %}
+                    <dl class="dl-horizontal pull-right">
+                        <dt>Total HT :</dt>
+                        <dd>{{ totalHT }} €</dd>
+
+                        <dt>TVA :</dt>
+                        <dd>{{ totalTaxe }} €</dd>
+
+                        <dt>Total TTC:</dt>
+                        <dd>{{ totalTTC }} €</dd>
+                    </dl>
+                {% endif %}#}
+                <div class="clearfix"></div>
+                {% if products|length != 0 %}
+                {%  if app.user %}
+                    <a href="{{ path('valider_panier') }}" class="btn btn-success pull-right">Valider mon panier</a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}"><button class="btn btn-success pull-right">Connectez pour valider</button></a>
+                {% endif %}
+                {% endif %}
+                <a href="{{ path('afficherProduits') }}" class="btn btn-primary pull-left">Continuer mes achats</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="{{ asset('FrontOffice/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
+    <script>
+        $(".shopping-cart").fadeToggle( "fast");
+        $(document).ready(function () {
+            var $imgs = [];
+            var $ids=[];
+            var $produits = [].sort(),
+                $return = [];
+            $.ajax({
+                url: 'GetSearchName',
+                success: function (data) {
+                    $produits=data;
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Ajax request failed.");
+                }
+            });
+            $.ajax({
+                url: 'GetSearchImage',
+                success: function (data) {
+                    $imgs=data;
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Ajax request failed.");
+                }
+            });
+            $.ajax({
+                url: 'GetSearchId',
+                success: function (data) {
+                    $ids=data;
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Ajax request failed.");
+                }
+            });
+
+            function strInArray(str, strArray) {
+                for (var j = 0; j < strArray.length; j++) {
+                    if (strArray[j].match(str) && $return.length < 5) {
+                        var $h = strArray[j].replace(str, "<strong>" + str + "</strong>");
+                        $pc="<img style='height: 50px;margin-left :10px;margin-right :10px;' src='/StockflowWEB/web/uploads/products/".concat($imgs[j],"'>");
+                        $pushh="<li style='margin-left: -40px;' class='prediction-item'><a style='color: gray;' href='/StockflowWEB/web/app_dev.php/produit/details/"+$ids[j]+"'>"+$pc+"<span class='prediction-text'>"+$h+"</span></a></li>";
+                        $return.push($pushh
+
+                        );
+                    }
+                }
+            }
+
+            function nextItem(kp) {
+                if ($(".focus").length > 0) {
+                    var $next = $(".focus").next(),
+                        $prev = $(".focus").prev();
+                }
+
+                if (kp == 38) {
+                    // Up
+
+                    if ($(".focus").is(":first-child")) {
+                        $prev = $(".prediction-item:last-child");
+                    }
+
+                    $(".prediction-item").removeClass("focus");
+                    $prev.addClass("focus");
+                } else if (kp == 40) {
+                    // Down
+
+                    if ($(".focus").is(":last-child")) {
+                        $next = $(".prediction-item:first-child");
+                    }
+
+                    $(".prediction-item").removeClass("focus");
+                    $next.addClass("focus");
+                }
+            }
+
+            $(function () {
+                $("#search-bar").keydown(function (e) {
+                    $key = e.keyCode;
+                    if ($key == 38 || $key == 40) {
+                        nextItem($key);
+                        return;
+                    }
+
+                    setTimeout(function () {
+                        var $search = $("#search-bar").val();
+                        $return = [];
+
+                        strInArray($search, $produits);
+
+                        if ($search == "" || !$("input").val) {
+                            $(".output").html("").slideUp();
+                        } else {
+                            $(".output").html($return).slideDown();
+                        }
+
+                        $(".prediction-item").on("click", function () {
+                            $text = $(this).find("span").text();
+                            $(".output").slideUp(function () {
+                                $(this).html("");
+                            });
+                            $("#search-bar").val($text);
+                        });
+
+                        $(".prediction-item:first-child").addClass("focus");
+                    }, 50);
+                });
+            });
+
+            $("#search-bar").focus(function () {
+                if ($(".prediction-item").length > 0) {
+                    $(".output").slideDown();
+                }
+
+                $("#searchform").submit(function (e) {
+                    e.preventDefault();
+                    $text = $(".focus").find("span").text();
+                    $(".output").slideUp();
+                    $("#search-bar").val($text);
+                    $("input").blur();
+                });
+            });
+
+            $("#search-bar").blur(function () {
+                if ($(".prediction-item").length > 0) {
+                    $(".output").slideUp();
+                }
+            });
+        });
+        (function(){
+
+            $("#cart").on("click", function() {
+                $(".shopping-cart").fadeToggle( "fast");
+            });
+
+        })();
+
+    </script>
+</section>
+
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block text-center">
+                    <div class="footer-logo">
+                        <img src="{{ asset('FrontOffice/images/lgg.png')}}" alt="logo" class="img-fluid">
+                    </div>
+                    <ul class="social-links-footer list-inline">
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-vimeo"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Subfooter -->
+<footer class="subfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 align-self-center">
+                <div class="copyright-text">
+                    <p><a href="#">StockFlow</a> &#169; 2020 All Right Reserved</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- JAVASCRIPTS -->
+<!-- jQuey -->
+<script src="{{ asset('FrontOffice/plugins/jquery/jquery.js')}}"></script>
+<!-- Popper js -->
+<script src="{{ asset('FrontOffice/plugins/popper/popper.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('FrontOffice/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- Smooth Scroll -->
+<script src="{{ asset('FrontOffice/plugins/smoothscroll/SmoothScroll.min.js')}}"></script>
+<!-- Isotope -->
+<script src="{{ asset('FrontOffice/plugins/isotope/mixitup.min.js')}}"></script>
+<!-- Magnific Popup -->
+<script src="{{ asset('FrontOffice/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<!-- Slick Carousel -->
+<script src="{{ asset('FrontOffice/plugins/slick/slick.min.js')}}"></script>
+<!-- SyoTimer -->
+<script src="{{ asset('FrontOffice/plugins/syotimer/jquery.syotimer.min.js')}}"></script>
+<!-- Google Mapl -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+<script type="text/javascript" src="{{ asset('FrontOffice/plugins/google-map/gmap.js')}}"></script>
+<!-- Custom Script -->
+<script src="{{ asset('FrontOffice/js/custom.js')}}"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

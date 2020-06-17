@@ -22,6 +22,9 @@ user:
 entrepot_mobile:
     resource: "@EntrepotMobileBundle/Resources/config/routing.yml"
     prefix:   /entrepotmobile
+commande:
+    resource: "@CommandeBundle/Resources/config/routing.yml"
+    prefix:   /commande
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
