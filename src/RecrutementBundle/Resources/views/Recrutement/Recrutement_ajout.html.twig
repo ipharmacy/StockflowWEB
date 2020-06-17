@@ -45,55 +45,43 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item dropdown active dropdown-slide">
-                    <a class="nav-link" href="#"  data-toggle="dropdown">Home
+                    <a class="nav-link" href="#" >Home
                         <span>/</span>
                     </a>
                     <!-- Dropdown list -->
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Homepage</a>
-                        <a class="dropdown-item" href="#">Homepage 2</a>
-                    </div>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Speakers
+                    <a class="nav-link" href="{{ path('afficherEntrepotfront') }}">Entrepots
                         <span>/</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-slide">
-                    <a class="nav-link" href="#" data-toggle="dropdown">Pages<span>/</span></a>
-                    <!-- Dropdown list -->
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">About Us</a>
-                        <a class="dropdown-item" href="#">Single Speaker</a>
-                        <a class="dropdown-item" href="#">Gallery</a>
-                        <a class="dropdown-item" href="#">Gallery-02</a>
-                        <a class="dropdown-item" href="#">Testimonial</a>
-                        <a class="dropdown-item" href="#">Pricing</a>
-                        <a class="dropdown-item" href="#">FAQ</a>
-                        <a class="dropdown-item" href="#">404</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Schedule<span>/</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sponsors<span>/</span></a>
-                </li>
-                <li class="nav-item dropdown dropdown-slide">
-                    <a class="nav-link" href="#"  data-toggle="dropdown">News
+                    <a class="nav-link" href="#"  data-toggle="dropdown">Produits
                         <span>/</span>
                     </a>
                     <!-- Dropdown list -->
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">News without sidebar</a>
-                        <a class="dropdown-item" href="#">News with right sidebar</a>
-                        <a class="dropdown-item" href="#">News with left sidebar</a>
-                        <a class="dropdown-item" href="#">News Single</a>
+                        <a class="dropdown-item" href="{{ path('afficherProduits') }}">Liste des produits</a>
+                        <a class="dropdown-item" href="{{ path('AfficherTopConsulted') }}">TOP Produits</a>
                     </div>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('recrutement_ajout') }}">Demande de recrutement</a>
+                    <a class="nav-link" href="{{ path('recrutement_ajout') }}">Demande de recrutement
+                        <span>/</span>
+                    </a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('publication_affiche2') }}">Forum
+                        <span>/</span>
+                    </a>
+
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('Blog_affichageF') }}">Blog</a>
+                </li>
+
+
             </ul>
         </div>
     </div>

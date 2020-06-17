@@ -41,64 +41,47 @@
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
       -->
-        <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                CT
-            </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Creative Tim
-            </a>
-        </div>
+
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
-                <li>
-                    <a href="./dashboard.html">
+                <li class="active ">
+                    <a href="{{ asset('BackOffice/examples/dashboard.html')}}">
                         <i class="now-ui-icons design_app"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="./icons.html">
-                        <i class="now-ui-icons education_atom"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="./map.html">
-                        <i class="now-ui-icons location_map-big"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="./notifications.html">
-                        <i class="now-ui-icons ui-1_bell-53"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="./user.html">
+                    <a href="{{ path('employe_afficher')}}">
                         <i class="now-ui-icons users_single-02"></i>
-                        <p>User Profile</p>
+                        <p>Employes</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ path('afficherEntrepots') }}">
+                        <i class="now-ui-icons education_atom"></i>
+                        <p>Entrepots</p>
                     </a>
                 </li>
                 <li>
-                    <a href="./tables.html">
-                        <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Table List</p>
+                    <a href="{{ path('listProduitBack') }}">
+                        <i class="now-ui-icons location_map-big"></i>
+                        <p>Produit</p>
                     </a>
                 </li>
-                <li class="active ">
-                    <a href="./typography.html">
+                <li>
+                    <a href="{{ path('blog_display')}}">
+                        <i class="now-ui-icons ui-1_bell-53"></i>
+                        <p>Blog</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('publication_addPublication')}}">
                         <i class="now-ui-icons text_caps-small"></i>
-                        <p>Typography</p>
+                        <p>Forum</p>
                     </a>
                 </li>
-                <li class="active-pro">
-                    <a href="./upgrade.html">
-                        <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </div>
