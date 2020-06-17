@@ -1,0 +1,44 @@
+<div class="containr">
+    <div class="shopping-cart">
+        <div class="shopping-cart-header">
+            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">{{ article }}</span>
+
+
+            <div class="shopping-cart-total">
+
+                <span class="lighter-text">Total:</span>
+                <span class="main-color-text">{{ total }} Dt</span>
+            </div>
+        </div> <!--end shopping-cart-header -->
+
+        <div>
+
+
+            <ul class="shopping-cart-items">
+
+                {% if article == 0 %}
+
+                    <li class="clearfix">Aucun article dans votre panier
+                    </li>
+
+
+                {% else %}
+                    {% for p in products %}
+
+                <li class="clearfix">
+                    <img src="{{ asset('../web/uploads/products/'~p.imageName()) }}" alt="View details" class="img-fluid">
+                    <span class="item-name">{{ p.nom }}</span>
+                    <span class="item-price">{{ p.prix }} Dt</span>
+                    <span class="item-quantity"> x {{ p.qte }}</span>
+                </li>
+                    {% endfor %}
+
+
+                {% endif %}
+            </ul>
+        </div>
+        {% if article != 0 %}
+        <a href="{{ path('afficher_panier') }}" class="button">Voir Panier</a>
+        {% endif %}
+    </div> <!--end shopping-cart -->
+</div> <!--end container -->

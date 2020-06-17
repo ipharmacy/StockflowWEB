@@ -133,8 +133,14 @@
                     </a>
 
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('Blog_affichageF') }}">Blog</a>
+                    <a class="nav-link" href="{{ path('Blog_affichageF') }}">Blog
+                        <span>/</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('afficher_panier') }}">Panier</a>
                 </li>
 
 
@@ -352,7 +358,7 @@
                         <div class="socials">
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="{{path('details',{'idProduit':row.idProduit})}}"><i class="fa fa-eye"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                <li class="list-inline-item"><a href="{{ path('add_basket', {'id' : row.idProduit}) }}"><i class="fa fa-cart-plus"></i></a></li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-heart"></i></a></li>
 
                             </ul>
